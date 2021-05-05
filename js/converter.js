@@ -41,41 +41,47 @@ const md = require("markdown-it")({
   },
 });
 
-// posts directory Route.
+// 'posts' directory.
 const directoryPath = path.join(__dirname, "..", "posts");
-console.log("directoryPath: ", directoryPath);
 
 // Reading files in a directory.
+// ex) directoryFiles: [ 'test1.md', 'test2.md', 'test3.md' ]
 const directoryFiles = fs.readdirSync(directoryPath);
-console.log("directoryFiles: ", directoryFiles);
 
 // Reading the template file to apply the template engine.
 const layoutHtmlFormat = fs.readFileSync(
   "../templates/layout-format.html",
   "utf8"
 );
+
 const articleHtmlFormat = fs.readFileSync(
   "../templates/md-contents-format.html",
   "utf8"
 );
+
 const listHtmlFormat = fs.readFileSync("../templates/list-format.html", "utf8");
 
 // Function to get file name excluding extension
 getHtmlFileName = (file) => {
-  return file.slice(0, file.indexOf(".")).toLowerCase();
+  return file.slice(0, file.indexOf("."));
 };
+
+// Create deploy directory.
+const deployDir = path.join(__dirname, "..", "deploy");
+
+if (!fs.existsSync(deployDir)) {
+  fs.mkdirSync(deployDir);
+}
 
 // List of files put in the deploy folder
 const deployFiles = [];
 
-// Reading the contents of a file.
+// Create html file in deploy by looping through files in posts with map function.
 directoryFiles.map((file) => {
   const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
-  console.log("fileContent: ", fileContent);
 
   // Converting markdown file to HTML language.
   const convertedFileContent = md.render(fileContent);
-  console.log("convertedFileContent: ", convertedFileContent);
 
   // Render
   const articleContent = ejs.render(articleHtmlFormat, {
@@ -87,18 +93,9 @@ directoryFiles.map((file) => {
   });
 
   const fileName = getHtmlFileName(file);
-  console.log("fileName: ", fileName);
   fs.writeFileSync(`../deploy/${fileName}.html`, articleHtml);
   deployFiles.push(fileName);
-  console.log("deployFiles: ", deployFiles);
 });
-
-// Create deploy directory.
-const deployDir = path.join(__dirname, "..", "deploy");
-console.log("deployDir: ", deployDir);
-if (!fs.existsSync(deployDir)) {
-  fs.mkdirSync(deployDir);
-}
 
 // File List Render
 const listContent = ejs.render(listHtmlFormat, {
