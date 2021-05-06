@@ -55,15 +55,46 @@ const layoutHtmlFormat = fs.readFileSync(
 );
 
 const articleHtmlFormat = fs.readFileSync(
-  "../templates/md-contents-format.html",
+  "../templates/article_format.html",
   "utf8"
 );
 
 const listHtmlFormat = fs.readFileSync("../templates/list-format.html", "utf8");
 
+const extractBody = (text) => {
+  return text.replace(/(\+{3})([\s\S]+?)(\1)/, "");
+};
+
 // Function to get file name excluding extension
 getHtmlFileName = (file) => {
   return file.slice(0, file.indexOf("."));
+};
+
+// Function to extract article information
+extractInfo = (text) => {
+  const string = text.match(/(\+{3})([\s|\S]+?)\1/);
+  
+
+  if (!string) {
+    return null;
+  } else {
+    const infoLines = string[2].match(/[^\r\n]+/g);
+    const info = {};
+    console.log('infoLines: ', infoLines)
+    if (infoLines) {
+      infoLines.map(infoLine => {
+        console.log('infoLine: ', infoLine)
+        const keyAndValue = infoLine.match(/(.+?):(.+)/);
+        console.log('keyAndValue: ', keyAndValue)
+        if (keyAndValue) {
+          const key = keyAndValue[1].replace(/\s/g, "");
+          const value = keyAndValue[2].replace(/['"]/g, "").trim();
+          info[key] = value;
+        }
+      });
+      return info;
+    }
+  }
 };
 
 // Create deploy directory.
@@ -81,20 +112,31 @@ directoryFiles.map((file) => {
   const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
 
   // Converting markdown file to HTML language.
-  const convertedFileContent = md.render(fileContent);
+  const convertedFileContent = md.render(extractBody(fileContent));
+
+  // Extract article information
+  const info = extractInfo(fileContent);
+  console.log('info: ', info);
 
   // Render
-  const articleContent = ejs.render(articleHtmlFormat, {
-    body: convertedFileContent,
-  });
+  if (info) {
+    const title = info.title || "";
+    const date = info.date || "";
 
-  const articleHtml = ejs.render(layoutHtmlFormat, {
-    content: articleContent,
-  });
+    const articleContent = ejs.render(articleHtmlFormat, {
+      body: convertedFileContent,
+      title,
+      date
+    });
 
-  const fileName = getHtmlFileName(file);
-  fs.writeFileSync(`../deploy/${fileName}.html`, articleHtml);
-  deployFiles.push(fileName);
+    const articleHtml = ejs.render(layoutHtmlFormat, {
+      content: articleContent,
+    });
+
+    const fileName = getHtmlFileName(file);
+    fs.writeFileSync(`../deploy/${fileName}.html`, articleHtml);
+    deployFiles.push(fileName);
+  }
 });
 
 // File List Render
