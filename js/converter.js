@@ -73,19 +73,19 @@ getHtmlFileName = (file) => {
 // Function to extract article information
 extractInfo = (text) => {
   const string = text.match(/(\+{3})([\s|\S]+?)\1/);
-  
+
 
   if (!string) {
     return null;
   } else {
     const infoLines = string[2].match(/[^\r\n]+/g);
     const info = {};
-    console.log('infoLines: ', infoLines)
+    console.log('infoLines: ', infoLines);
     if (infoLines) {
       infoLines.map(infoLine => {
-        console.log('infoLine: ', infoLine)
+        console.log('infoLine: ', infoLine);
         const keyAndValue = infoLine.match(/(.+?):(.+)/);
-        console.log('keyAndValue: ', keyAndValue)
+        console.log('keyAndValue: ', keyAndValue);
         if (keyAndValue) {
           const key = keyAndValue[1].replace(/\s/g, "");
           const value = keyAndValue[2].replace(/['"]/g, "").trim();
@@ -122,11 +122,13 @@ directoryFiles.map((file) => {
   if (info) {
     const title = info.title || "";
     const date = info.date || "";
+    const desc = info.desc || "";
 
     const articleContent = ejs.render(articleHtmlFormat, {
       body: convertedFileContent,
       title,
-      date
+      date,
+      desc
     });
 
     const articleHtml = ejs.render(layoutHtmlFormat, {
@@ -135,7 +137,8 @@ directoryFiles.map((file) => {
 
     const fileName = getHtmlFileName(file);
     fs.writeFileSync(`../deploy/${fileName}.html`, articleHtml);
-    deployFiles.push(fileName);
+    deployFiles.push({ path: `${fileName}.html`, title, date, desc });
+    console.log('deployFiles: ', deployFiles);
   }
 });
 
