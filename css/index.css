@@ -20,4 +20,51 @@
   color: #424242;
 }
 
+.header-wrap {
+  border-bottom: 1px solid #dddddd;
+  height: 4rem;
+  width: 100%;
+  line-height: 4rem;
+}
+
+.header {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.header_left {
+  width: 50%;
+}
+.header_left .logo-wrap {
+  display: flex;
+}
+.header_left .logo-wrap a {
+  padding-right: 1rem;
+  margin-top: 0.5rem;
+}
+.header_left .logo-wrap a img {
+  line-height: 4rem;
+  width: 3rem;
+}
+.header_nav {
+  width: 50%;
+}
+.header_nav ul {
+  margin: 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.header_nav ul li {
+  list-style-type: none;
+}
+.header_nav ul li a {
+  text-decoration: none;
+}
+
+.content {
+  width: 70%;
+  margin: 0 auto;
+}
+
 /*# sourceMappingURL=index.css.map */

@@ -61,6 +61,9 @@ const articleHtmlFormat = fs.readFileSync(
 
 const listHtmlFormat = fs.readFileSync("../templates/list-format.html", "utf8");
 
+const headerHtmlFormat = fs.readFileSync("../templates/header_format.html",
+  "utf8");
+
 const extractBody = (text) => {
   return text.replace(/(\+{3})([\s\S]+?)(\1)/, "");
 };
@@ -73,7 +76,6 @@ getHtmlFileName = (file) => {
 // Function to extract article information
 extractInfo = (text) => {
   const string = text.match(/(\+{3})([\s|\S]+?)\1/);
-
 
   if (!string) {
     return null;
@@ -96,6 +98,18 @@ extractInfo = (text) => {
     }
   }
 };
+
+// Reading Introduction.md
+const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
+
+const introductionInfo = extractInfo(introductionFile);
+console.log('introductionInfo: ', introductionInfo);
+
+const header = ejs.render(headerHtmlFormat, {
+  title: introductionInfo.title,
+  github: introductionInfo.github,
+  logo: introductionInfo.logo
+});
 
 // Create deploy directory.
 const deployDir = path.join(__dirname, "..", "deploy");
@@ -133,6 +147,7 @@ directoryFiles.map((file) => {
 
     const articleHtml = ejs.render(layoutHtmlFormat, {
       content: articleContent,
+      header
     });
 
     const fileName = getHtmlFileName(file);
@@ -149,6 +164,7 @@ const listContent = ejs.render(listHtmlFormat, {
 
 const listHtml = ejs.render(layoutHtmlFormat, {
   content: listContent,
+  header
 });
 
 // Create "index.html"
