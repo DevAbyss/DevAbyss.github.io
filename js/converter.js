@@ -3,6 +3,8 @@ const path = require("path");
 const fs = require("fs");
 const ejs = require("ejs");
 
+const { layoutHtmlFormat, headerHtmlFormat, articleHtmlFormat, listHtmlFormat } = require("./ReadHtmlFormat");
+
 const hljs = require("highlight.js");
 const md = require("markdown-it")({
   html: false, // Enable HTML tags in source.
@@ -47,22 +49,6 @@ const directoryPath = path.join(__dirname, "..", "posts");
 // Reading files in a directory.
 // ex) directoryFiles: [ 'test1.md', 'test2.md', 'test3.md' ]
 const directoryFiles = fs.readdirSync(directoryPath);
-
-// Reading the template file to apply the template engine.
-const layoutHtmlFormat = fs.readFileSync(
-  "../templates/layout-format.html",
-  "utf8"
-);
-
-const articleHtmlFormat = fs.readFileSync(
-  "../templates/article_format.html",
-  "utf8"
-);
-
-const listHtmlFormat = fs.readFileSync("../templates/list-format.html", "utf8");
-
-const headerHtmlFormat = fs.readFileSync("../templates/header_format.html",
-  "utf8");
 
 const extractBody = (text) => {
   return text.replace(/(\+{3})([\s\S]+?)(\1)/, "");
