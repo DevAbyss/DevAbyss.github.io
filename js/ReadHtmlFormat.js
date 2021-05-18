@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-// Reading the template file to apply the template engine.
+// template engine을 적용하기 위해 template file 읽기
 const layoutHtmlFormat = fs.readFileSync(
     "../templates/layout-format.html",
     "utf8"

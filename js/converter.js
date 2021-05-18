@@ -1,9 +1,6 @@
-// modules
 const path = require("path");
 const fs = require("fs");
 const ejs = require("ejs");
-
-const { layoutHtmlFormat, headerHtmlFormat, articleHtmlFormat, listHtmlFormat } = require("./ReadHtmlFormat");
 
 const hljs = require("highlight.js");
 const md = require("markdown-it")({
@@ -43,6 +40,9 @@ const md = require("markdown-it")({
   },
 });
 
+const { layoutHtmlFormat, headerHtmlFormat, articleHtmlFormat, listHtmlFormat } = require("./ReadHtmlFormat");
+const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
+
 // 'posts' directory.
 const directoryPath = path.join(__dirname, "..", "posts");
 
@@ -50,52 +50,11 @@ const directoryPath = path.join(__dirname, "..", "posts");
 // ex) directoryFiles: [ 'test1.md', 'test2.md', 'test3.md' ]
 const directoryFiles = fs.readdirSync(directoryPath);
 
-const extractBody = (text) => {
-  return text.replace(/(\+{3})([\s\S]+?)(\1)/, "");
-};
-
-// Function to get file name excluding extension
-getHtmlFileName = (file) => {
-  return file.slice(0, file.indexOf("."));
-};
-
-// Function to extract article information
-extractInfo = (text) => {
-  const string = text.match(/(\+{3})([\s|\S]+?)\1/);
-
-  if (!string) {
-    return null;
-  } else {
-    const infoLines = string[2].match(/[^\r\n]+/g);
-    const info = {};
-    console.log('infoLines: ', infoLines);
-    if (infoLines) {
-      infoLines.map(infoLine => {
-        console.log('infoLine: ', infoLine);
-        const keyAndValue = infoLine.match(/(.+?):(.+)/);
-        console.log('keyAndValue: ', keyAndValue);
-        if (keyAndValue) {
-          const key = keyAndValue[1].replace(/\s/g, "");
-          const value = keyAndValue[2].replace(/['"]/g, "").trim();
-          info[key] = value;
-        }
-      });
-      return info;
-    }
-  }
-};
-
 // Reading Introduction.md
 const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
 
 const introductionInfo = extractInfo(introductionFile);
 console.log('introductionInfo: ', introductionInfo);
-
-const header = ejs.render(headerHtmlFormat, {
-  title: introductionInfo.title,
-  github: introductionInfo.github,
-  logo: introductionInfo.logo
-});
 
 // Create deploy directory.
 const deployDir = path.join(__dirname, "..", "deploy");
@@ -107,7 +66,7 @@ if (!fs.existsSync(deployDir)) {
 // List of files put in the deploy folder
 const deployFiles = [];
 
-// Create html file in deploy by looping through files in posts with map function.
+// map function을 사용하여 deploy folder에 posts file의 html file을 반복하여 생성
 directoryFiles.map((file) => {
   const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
 
@@ -136,14 +95,19 @@ directoryFiles.map((file) => {
       header
     });
 
-    const fileName = getHtmlFileName(file);
+    const fileName = extractHtmlFileName(file);
     fs.writeFileSync(`../deploy/${fileName}.html`, articleHtml);
     deployFiles.push({ path: `${fileName}.html`, title, date, desc });
     console.log('deployFiles: ', deployFiles);
   }
 });
 
-// File List Render
+const header = ejs.render(headerHtmlFormat, {
+  title: introductionInfo.title,
+  github: introductionInfo.github,
+  logo: introductionInfo.logo
+});
+
 const listContent = ejs.render(listHtmlFormat, {
   lists: deployFiles,
 });
