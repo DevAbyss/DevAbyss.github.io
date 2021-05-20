@@ -40,7 +40,7 @@ const md = require("markdown-it")({
   },
 });
 
-const { layoutHtmlFormat, headerHtmlFormat, articleHtmlFormat, listHtmlFormat } = require("./ReadHtmlFormat");
+const { defaultTemplate, headerHtmlFormat, aboutMeHtmlFormat, listHtmlFormat, articleHtmlFormat } = require("./ReadHtmlFormat");
 const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
 
 // 'posts' directory.
@@ -52,9 +52,7 @@ const directoryFiles = fs.readdirSync(directoryPath);
 
 // Reading Introduction.md
 const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
-
 const introductionInfo = extractInfo(introductionFile);
-console.log('introductionInfo: ', introductionInfo);
 
 // Create deploy directory.
 const deployDir = path.join(__dirname, "..", "deploy");
@@ -62,6 +60,18 @@ const deployDir = path.join(__dirname, "..", "deploy");
 if (!fs.existsSync(deployDir)) {
   fs.mkdirSync(deployDir);
 }
+
+const header = ejs.render(headerHtmlFormat, {
+  title: introductionInfo.title,
+  github: introductionInfo.github,
+  logo: introductionInfo.logo,
+  aboutMe: '../templates/about_me_format.html'
+});
+
+const aboutMe = ejs.render(defaultTemplate, {
+  content: aboutMeHtmlFormat,
+  header
+});
 
 // List of files put in the deploy folder
 const deployFiles = [];
@@ -90,7 +100,7 @@ directoryFiles.map((file) => {
       desc
     });
 
-    const articleHtml = ejs.render(layoutHtmlFormat, {
+    const articleHtml = ejs.render(defaultTemplate, {
       content: articleContent,
       header
     });
@@ -102,17 +112,11 @@ directoryFiles.map((file) => {
   }
 });
 
-const header = ejs.render(headerHtmlFormat, {
-  title: introductionInfo.title,
-  github: introductionInfo.github,
-  logo: introductionInfo.logo
-});
-
 const listContent = ejs.render(listHtmlFormat, {
   lists: deployFiles,
 });
 
-const listHtml = ejs.render(layoutHtmlFormat, {
+const listHtml = ejs.render(defaultTemplate, {
   content: listContent,
   header
 });
