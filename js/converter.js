@@ -55,12 +55,18 @@ const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
 const introductionInfo = extractInfo(introductionFile);
 
 // Create deploy directory.
-const deployDir = path.join(__dirname, "..", "deploy");
+// const deployDir = path.join(__dirname, "..", "deploy");
+// if (!fs.existsSync(deployDir)) {
+//   fs.mkdirSync(deployDir);
+// }
 
-if (!fs.existsSync(deployDir)) {
-  fs.mkdirSync(deployDir);
+// Create category directory
+const categoryDir = path.join(__dirname, '..', 'deploy/category');
+if (!fs.existsSync(categoryDir)) {
+  fs.mkdirSync(categoryDir);
 }
 
+// Render
 const header = ejs.render(headerHtmlFormat, {
   title: introductionInfo.title,
   github: introductionInfo.github,
@@ -75,19 +81,36 @@ const aboutMe = ejs.render(defaultTemplate, {
 
 // List of files put in the deploy folder
 const deployFiles = [];
+const filesByCategory = [];
 
 // map function을 사용하여 deploy folder에 posts file의 html file을 반복하여 생성
 directoryFiles.map((file) => {
   const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
 
-  // Converting markdown file to HTML language.
-  const convertedFileContent = md.render(extractBody(fileContent));
+  fileContent.map(file => {
+    const mdFile = fs.readFileSync(`../post/${directoryFiles[index]}/${file}`, 'utf-8');
 
-  // Extract article information
-  const info = extractInfo(fileContent);
-  console.log('info: ', info);
+    // 글 정보 추출
+    const info = extractInfo(mdFile);
+    console.log('info: ', info);
 
-  // Render
+    // md File을 HTML로 변환
+    const convertedFileBody = md.render(extractBody(mdFile));
+
+    const categoryName = info.category && info.category.replace(/(^\s*)|(\s*$)/gi, '');
+
+    const folder =
+      info.category && info.category.toLocaleLowerCase().replace(/(\s*)/g, '');
+
+    const fileName = (
+      file.slice(0, file.indexOf('.')).toLocaleLowerCase() + `.html`
+    ).replace(/(\s*)/g, '');
+
+
+  });
+
+
+
   if (info) {
     const title = info.title || "";
     const date = info.date || "";
