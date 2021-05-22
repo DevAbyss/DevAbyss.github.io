@@ -84,12 +84,14 @@ const deployFiles = [];
 const filesByCategory = [];
 
 // map function을 사용하여 deploy folder에 posts file의 html file을 반복하여 생성
-directoryFiles.map((file) => {
-  const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
+directoryFiles.map((directory, index) => {
+  const fileContent = fs.readdirSync(`../posts/${directory}`);
+  // const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
+  console.log('fileContent: ', fileContent);
 
   fileContent.map(file => {
     const mdFile = fs.readFileSync(`../post/${directoryFiles[index]}/${file}`, 'utf-8');
-
+    console.log('mdFile: ', mdFile);
     // 글 정보 추출
     const info = extractInfo(mdFile);
     console.log('info: ', info);
@@ -106,10 +108,7 @@ directoryFiles.map((file) => {
       file.slice(0, file.indexOf('.')).toLocaleLowerCase() + `.html`
     ).replace(/(\s*)/g, '');
 
-
   });
-
-
 
   if (info) {
     const title = info.title || "";

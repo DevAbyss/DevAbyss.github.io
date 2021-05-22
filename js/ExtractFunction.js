@@ -1,7 +1,6 @@
 // Function to extract article information
 const extractInfo = (md) => {
     const string = md.match(/(\+{3})([\s|\S]+?)\1/);
-    console.log('string: ', string);
     const info = {};
 
     if (string === null) {
