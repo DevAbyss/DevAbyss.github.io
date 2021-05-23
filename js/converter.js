@@ -179,7 +179,6 @@ const header = ejs.render(headerTemplate, {
     allArticles: allArticles,
     categories: filesByCategory,
     aboutMe: '/deploy/aboutMe/aboutMe.html',
-    nav: navTemplate
 });
 
 // About Me
@@ -190,7 +189,8 @@ if (!fs.existsSync(aboutMeDir)) {
 
 const aboutMe = ejs.render(defaultTemplate, {
     content: aboutMeTemplate,
-    header
+    header,
+    nav: navTemplate
 });
 
 fs.writeFileSync('../deploy/aboutMe/aboutMe.html', aboutMe);
@@ -200,17 +200,47 @@ const sideBar = ejs.render(sideBarTemplate, {
 });
 
 filesByCategory.map((category) => {
-    // category
+    // category folder 생성
+    if (category.folder !== undefined) {
+        const categoryDir = `../deploy/${category.folder}`;
+        if (!fs.existsSync(categoryDir)) {
+            fs.mkdirSync(categoryDir);
+        }
+    }
+
+    // category 별로 file의 list를 보여주는 category page 생성
+    // files 최신순으로 정렬
+    const orderdFiles = category.files.sort((a, b) => {
+        console.log('a: ', a);
+        return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
+    });
+
+    const articleList = ejs.render(listTemplate, {
+        files: orderdFiles,
+        category: category.categoryName,
+        folder: category.folder
+    });
+
+    const articleContent = ejs.render(defaultTemplate, {
+        content: articleList,
+        header,
+        nav: navTemplate
+    });
 });
 
-const listContent = ejs.render(listTemplate, {
-    lists: allArticles,
-});
+// const listContent = ejs.render(listTemplate, {
+//     lists: allArticles,
+// });
 
-const listHtml = ejs.render(defaultTemplate, {
-    content: listContent,
-    header
-});
+// const listHtml = ejs.render(defaultTemplate, {
+//     content: listContent,
+//     header,
+//     nav: navTemplate
+// });
 
 // Create "index.html"
-fs.writeFileSync("../index.html", listHtml);
+const indexHtml = ejs.render(defaultTemplate, {
+    header,
+    nav: navTemplate
+});
+fs.writeFileSync("../index.html", indexHtml);

@@ -1,6 +1,6 @@
 +++
 title: 'test2'
-date: '2021-03-11'
+date: '20210311'
 category: 'test1'
 desc: "test"
 +++
