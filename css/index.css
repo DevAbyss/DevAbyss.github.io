@@ -47,18 +47,18 @@
   line-height: 4rem;
   width: 3rem;
 }
-.header_nav {
+#nav {
   width: 50%;
 }
-.header_nav ul {
+#nav ul {
   margin: 0;
   display: flex;
   justify-content: space-evenly;
 }
-.header_nav ul li {
+#nav ul li {
   list-style-type: none;
 }
-.header_nav ul li a {
+#nav ul li a {
   text-decoration: none;
 }
 

@@ -6,22 +6,26 @@ const defaultTemplate = fs.readFileSync(
     "utf8"
 );
 
-const headerHtmlFormat = fs.readFileSync("../templates/header_format.html",
+const headerTemplate = fs.readFileSync("../templates/header.html",
     "utf8");
+const navTemplate = fs.readFileSync('../templates/nav.html');
 
-const listHtmlFormat = fs.readFileSync("../templates/list-format.html", "utf8");
+const listTemplate = fs.readFileSync("../templates/list.html", "utf8");
 
-const articleHtmlFormat = fs.readFileSync(
-    "../templates/article_format.html",
+const articleTemplate = fs.readFileSync(
+    "../templates/article.html",
     "utf8"
 );
 
-const aboutMeHtmlFormat = fs.readFileSync("../templates/about_me_format.html", "utf8");
+const aboutMeTemplate = fs.readFileSync("../templates/aboutMe.html", "utf8");
+const sideBarTemplate = fs.readFileSync('../templates/sideBar.html', 'utf8');
 
 module.exports = {
     defaultTemplate,
-    headerHtmlFormat,
-    listHtmlFormat,
-    articleHtmlFormat,
-    aboutMeHtmlFormat
+    headerTemplate,
+    navTemplate,
+    listTemplate,
+    articleTemplate,
+    aboutMeTemplate,
+    sideBarTemplate
 };

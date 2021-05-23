@@ -20,7 +20,6 @@ const extractInfo = (md) => {
                     info[key] = value;
                 }
             });
-            console.log('info: ', info);
             return info;
         }
     }
