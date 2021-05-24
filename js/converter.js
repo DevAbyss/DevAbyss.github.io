@@ -60,12 +60,6 @@ console.log('directoryPath: ', directoryPath);
 const directories = fs.readdirSync(directoryPath);
 console.log('directories: ', directories);
 
-// Create deploy directory.
-// const deployDir = path.join(__dirname, "..", "deploy");
-// if (!fs.existsSync(deployDir)) {
-//   fs.mkdirSync(deployDir);
-// }
-
 // Create category directory
 const categoryDir = path.join(__dirname, '..', 'deploy/category');
 if (!fs.existsSync(categoryDir)) {
@@ -74,15 +68,12 @@ if (!fs.existsSync(categoryDir)) {
 
 // List of files put in the deploy folder
 const allArticles = [];
+const articles = [];
 const filesByCategory = [];
 
 // map function을 사용하여 deploy folder에 posts file의 html file을 반복하여 생성
 directories.map((directory, index) => {
-    console.log('directories: ', directories);
-    console.log('directory: ', directory);
     const fileContent = fs.readdirSync(`../posts/${directory}`);
-    // const fileContent = fs.readFileSync(`../posts/${file}`, "utf8");
-    console.log('fileContent: ', fileContent);
 
     let files = [];
 
@@ -134,37 +125,11 @@ directories.map((directory, index) => {
             } else {
                 files[findIndex].files.push(fileObj);
             }
+            articles.push(fileObj);
         }
     });
-    console.log('files: ', files);
 
     filesByCategory.push(...files);
-    console.log('filesByCategory: ', filesByCategory);
-
-    /**
-    if (info) {
-      const title = info.title || "";
-      const date = info.date || "";
-      const desc = info.desc || "";
-  
-      const articleContent = ejs.render(articleHtmlFormat, {
-        body: convertedFileContent,
-        title,
-        date,
-        desc
-      });
-  
-      const articleHtml = ejs.render(defaultTemplate, {
-        content: articleContent,
-        header
-      });
-  
-      const fileName = extractHtmlFileName(file);
-      fs.writeFileSync(`../deploy/${fileName}.html`, articleHtml);
-      allArticles.push({ path: `${fileName}.html`, title, date, desc });
-      console.log('allArticles: ', allArticles);
-    }
-     */
 });
 console.log('allArticles: ', allArticles);
 
@@ -178,7 +143,7 @@ const header = ejs.render(headerTemplate, {
     introductionInfo: introductionInfo,
     allArticles: allArticles,
     categories: filesByCategory,
-    aboutMe: '/deploy/aboutMe/aboutMe.html',
+    // aboutMe: '/deploy/aboutMe/aboutMe.html',
 });
 
 // About Me
@@ -211,7 +176,6 @@ filesByCategory.map((category) => {
     // category 별로 file의 list를 보여주는 category page 생성
     // files 최신순으로 정렬
     const orderdFiles = category.files.sort((a, b) => {
-        console.log('a: ', a);
         return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
     });
 
@@ -221,10 +185,34 @@ filesByCategory.map((category) => {
         folder: category.folder
     });
 
-    const articleContent = ejs.render(defaultTemplate, {
+    const articleTemplate = ejs.render(defaultTemplate, {
         content: articleList,
+        sideBar: sideBar,
         header,
         nav: navTemplate
+    });
+
+    console.log('category: ', category);
+    fs.writeFileSync(`../deploy/category/${category.folder}.html`, articleTemplate);
+    // file 별로 article page 생성
+    category.files.map(file => {
+        console.log('file: ', file);
+        const path = `../deploy/${category.folder}/${file.fileNAme}`;
+
+        const article = ejs.render(articleTemplate, {
+            body: file.convertedBody,
+            introductionInfo: introductionInfo,
+            path: path
+        });
+
+        const articleIndexHtml = ejs.render(defaultTemplate, {
+            content: article,
+            header,
+            nav: navTemplate,
+            sideBar: sideBar,
+        });
+
+        fs.writeFileSync(`../deploy/${category.folder}/${file.fileName}`, articleIndexHtml);
     });
 });
 
@@ -238,9 +226,21 @@ filesByCategory.map((category) => {
 //     nav: navTemplate
 // });
 
+// 'Study' Screen
+const orderdArticles = articles.sort((a, b) => {
+    return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
+});
+console.log('orderdArticles: ', orderdArticles);
+const articleContent = ejs.render(listTemplate, {
+    articles: orderdArticles
+});
+
 // Create "index.html"
 const indexHtml = ejs.render(defaultTemplate, {
+    content: articleContent,
     header,
-    nav: navTemplate
+    nav: navTemplate,
+    sideBar: sideBar,
 });
+
 fs.writeFileSync("../index.html", indexHtml);

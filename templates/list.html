@@ -1,14 +1,15 @@
-<% files.map(list=> { %>
-    <div class="list">
-        <span class="list_date">
-            <%=list.date%>
+<% articles.map(article=> {%>
+    <div class="home__list">
+        <span class="home__list-date">
+            <%=article.articleInfo.date %>
         </span>
-        <a href="../deploy/<%=list.path%>" class="list_link">
+        <a class="home__list-link" href="./deploy/<%=article.folder%>/<%=article.fileName%>">
             <h2 class="title">
-                <%=list.title%>
+                <%=article.articleInfo.title %>
             </h2>
             <p class="desc">
-                <%=list.desc%>
+                <% const desc=article.articleInfo.description || ' ' %>
+                    <%=desc %>
             </p>
         </a>
     </div>
