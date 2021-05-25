@@ -47,7 +47,8 @@ const {
     listTemplate,
     articleTemplate,
     sideBarTemplate,
-    navTemplate
+    navTemplate,
+    articleListTemplate
 } = require("./ReadHtmlFormat");
 const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
 
@@ -216,22 +217,13 @@ filesByCategory.map((category) => {
     });
 });
 
-// const listContent = ejs.render(listTemplate, {
-//     lists: allArticles,
-// });
-
-// const listHtml = ejs.render(defaultTemplate, {
-//     content: listContent,
-//     header,
-//     nav: navTemplate
-// });
-
+console.log('articles: ', articles);
 // 'Study' Screen
 const orderdArticles = articles.sort((a, b) => {
     return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
 });
 console.log('orderdArticles: ', orderdArticles);
-const articleContent = ejs.render(listTemplate, {
+const articleContent = ejs.render(articleListTemplate, {
     articles: orderdArticles
 });
 
@@ -240,7 +232,7 @@ const indexHtml = ejs.render(defaultTemplate, {
     content: articleContent,
     header,
     nav: navTemplate,
-    sideBar: sideBar,
+    sideBar,
 });
 
 fs.writeFileSync("../index.html", indexHtml);

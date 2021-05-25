@@ -1,0 +1,16 @@
+<% articles.map(article=> {%>
+    <div class="home__list">
+        <span class="home__list-date">
+            <%=article.articleInfo.date %>
+        </span>
+        <a class="home__list-link" href="./deploy/<%=article.folder%>/<%=article.fileName%>">
+            <h2 class="title">
+                <%=article.articleInfo.title %>
+            </h2>
+            <p class="desc">
+                <% const desc=article.articleInfo.desc || '' %>
+                    <%=desc %>
+            </p>
+        </a>
+    </div>
+    <% }) %>

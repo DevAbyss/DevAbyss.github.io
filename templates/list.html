@@ -1,16 +1,28 @@
-<% articles.map(article=> {%>
-    <div class="home__list">
-        <span class="home__list-date">
-            <%=article.articleInfo.date %>
-        </span>
-        <a class="home__list-link" href="./deploy/<%=article.folder%>/<%=article.fileName%>">
-            <h2 class="title">
-                <%=article.articleInfo.title %>
-            </h2>
-            <p class="desc">
-                <% const desc=article.articleInfo.description || ' ' %>
-                    <%=desc %>
-            </p>
-        </a>
+<div class="list">
+    <div class="title">
+        <i class="far fa-folder"></i>
+        <%=category %>
+
     </div>
-    <% }) %>
+
+
+    <ul>
+        <% files.forEach(file=> { %>
+            <li>
+                <i class="fas fa-circle"></i>
+                <div class="content">
+                    <a href="/deploy/<%=folder %>/<%=file.fileName %>">
+                        <span>
+                            <%=file.articleInfo.title %>
+                        </span>
+                    </a>
+                    <span>
+                        <%= file.articleInfo.date %>
+                    </span>
+
+                </div>
+            </li>
+            <% }) %>
+    </ul>
+
+</div>

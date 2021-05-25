@@ -14,6 +14,7 @@ const headerTemplate = fs.readFileSync("../templates/header.html",
 const navTemplate = fs.readFileSync('../templates/nav.html');
 
 // Article Template
+const articleListTemplate = fs.readFileSync('../templates/articleList.html', 'utf8');
 const listTemplate = fs.readFileSync("../templates/list.html", "utf8");
 const articleTemplate = fs.readFileSync(
     "../templates/article.html",
@@ -27,6 +28,7 @@ module.exports = {
     defaultTemplate,
     headerTemplate,
     navTemplate,
+    articleListTemplate,
     listTemplate,
     articleTemplate,
     sideBarTemplate,
