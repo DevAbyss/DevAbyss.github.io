@@ -48,7 +48,8 @@ const {
     articleTemplate,
     sideBarTemplate,
     navTemplate,
-    articleListTemplate
+    articleListTemplate,
+    studyTemplate
 } = require("./ReadHtmlFormat");
 const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
 
@@ -147,19 +148,29 @@ const header = ejs.render(headerTemplate, {
     // aboutMe: '/deploy/aboutMe/aboutMe.html',
 });
 
-// About Me
-const aboutMeDir = `../deploy/aboutMe`;
-if (!fs.existsSync(aboutMeDir)) {
-    fs.mkdirSync(aboutMeDir);
+// nav
+const navDir = '../deploy/nav';
+if (!fs.existsSync(navDir)) {
+    fs.mkdirSync(navDir);
 }
 
+// About Me
 const aboutMe = ejs.render(defaultTemplate, {
     content: aboutMeTemplate,
     header,
     nav: navTemplate
 });
 
-fs.writeFileSync('../deploy/aboutMe/aboutMe.html', aboutMe);
+fs.writeFileSync('../deploy/nav/aboutMe.html', aboutMe);
+
+// Study
+const study = ejs.render(defaultTemplate, {
+    content: studyTemplate,
+    header,
+    nav: navTemplate
+});
+
+fs.writeFileSync('../deploy/nav/study.html', study);
 
 const sideBar = ejs.render(sideBarTemplate, {
     categories: filesByCategory,
@@ -195,6 +206,7 @@ filesByCategory.map((category) => {
 
     console.log('category: ', category);
     fs.writeFileSync(`../deploy/category/${category.folder}.html`, articleTemplate);
+
     // file 별로 article page 생성
     category.files.map(file => {
         console.log('file: ', file);
@@ -227,9 +239,17 @@ const articleContent = ejs.render(articleListTemplate, {
     articles: orderdArticles
 });
 
-// Create "index.html"
-const indexHtml = ejs.render(defaultTemplate, {
+const studyMenuHtml = ejs.render(studyTemplate, {
     content: articleContent,
+    header,
+    nav: navTemplate,
+    sideBar,
+});
+
+// fs.writeFileSync(fs.writeFileSync(`../deploy/${category.folder}/${file.fileName}`, studyMenuHtml));
+
+const indexHtml = ejs.render(defaultTemplate, {
+    content: aboutMeTemplate,
     header,
     nav: navTemplate,
     sideBar,
