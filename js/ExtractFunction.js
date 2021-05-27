@@ -11,9 +11,8 @@ const extractInfo = (md) => {
 
         if (infoLines) {
             infoLines.map(infoLine => {
-                console.log('infoLine: ', infoLine);
                 const keyAndValue = infoLine.match(/(.+?):(.+)/);
-                console.log('keyAndValue: ', keyAndValue);
+
                 if (keyAndValue) {
                     const key = keyAndValue[1].replace(/\s/g, "");
                     const value = keyAndValue[2].replace(/['"]/g, "").trim();

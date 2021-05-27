@@ -53,38 +53,42 @@ const {
 } = require("./ReadHtmlFormat");
 const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
 
-// 'posts' directory.
+// 'posts' folder 읽기
 const directoryPath = path.join(__dirname, "..", "posts");
-console.log('directoryPath: ', directoryPath);
-
-// Reading files in a directory.
-// ex) directoryFiles: [ 'test1.md', 'test2.md', 'test3.md' ]
 const directories = fs.readdirSync(directoryPath);
-console.log('directories: ', directories);
 
-// Create category directory
+// 'deploy' folder 생성
+const deployDir = path.join(__dirname, '..', 'deploy');
+if (!fs.existsSync(deployDir)) {
+    fs.mkdirSync(deployDir);
+}
+
+// 전체 'category' folder 생성
 const categoryDir = path.join(__dirname, '..', 'deploy/category');
 if (!fs.existsSync(categoryDir)) {
     fs.mkdirSync(categoryDir);
 }
 
-// List of files put in the deploy folder
-const allArticles = [];
+// 'nav' folder 생성
+const navDir = '../deploy/nav';
+if (!fs.existsSync(navDir)) {
+    fs.mkdirSync(navDir);
+}
+
+const articleList = [];
 const articles = [];
 const filesByCategory = [];
 
-// map function을 사용하여 deploy folder에 posts file의 html file을 반복하여 생성
 directories.map((directory, index) => {
-    const fileContent = fs.readdirSync(`../posts/${directory}`);
+    const fileList = fs.readdirSync(`../posts/${directory}`);
 
     let files = [];
 
-    fileContent.map((file) => {
+    fileList.map((file) => {
         const mdFile = fs.readFileSync(`../posts/${directories[index]}/${file}`, 'utf-8');
 
         // 글 정보 추출
         const articleInfo = extractInfo(mdFile);
-        console.log('articleInfo: ', articleInfo);
 
         // md File을 HTML로 변환
         const convertedBody = md.render(extractBody(mdFile));
@@ -98,29 +102,29 @@ directories.map((directory, index) => {
             file.slice(0, file.indexOf('.')).toLocaleLowerCase() + `.html`
         ).replace(/(\s*)/g, '');
 
-        // Array.prototype.findIndex();
-        // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스 반환
-        // 만족하는 요소가 없으면 -1을 반환
-        let findIndex = files.findIndex(i => i.categoryName === categoryName);
-        console.log('findIndex: ', findIndex);
         let fileObj = {
-            folder,
+            //folder,
+            categoryName,
             fileName,
             articleInfo,
             convertedBody
         };
 
+        // Array.prototype.findIndex();
+        // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스 반환
+        // 만족하는 요소가 없으면 -1을 반환
+        let findIndex = files.findIndex(i => i.categoryName === categoryName);
+
         if (articleInfo.category) {
-            allArticles.push({
+            articleList.push({
                 title: articleInfo.title,
                 date: articleInfo.date,
                 path: `../deploy/${folder}/${fileName}`
             });
-            console.log('allArticles: ', allArticles);
 
             if (findIndex === -1) {
                 files.push({
-                    folder,
+                    //folder,
                     categoryName,
                     files: [fileObj]
                 });
@@ -133,53 +137,29 @@ directories.map((directory, index) => {
 
     filesByCategory.push(...files);
 });
-console.log('allArticles: ', allArticles);
+
+console.log('filesByCategory: ', filesByCategory);
 
 // Reading Introduction.md
 const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
 const introductionInfo = extractInfo(introductionFile);
 
-// allArticles: [{title: 'test3', date: '2021-03-11', path: '../deploy/asd/test3.html'}, {...}]
-// filesByCategory: [{folder: 'test1', categoryName: 'test1', files: [ [Object], [Object] ]}, {...}]
+// articleList: [{title: 'test3', date: '2021-03-11', path: '../deploy/asd/test3.html'}, {...}]
+// filesByCategory: [{categoryName: 'test1', files: [ [Object], [Object] ]}, {...}]
 const header = ejs.render(headerTemplate, {
     introductionInfo: introductionInfo,
-    allArticles: allArticles,
+    //articleList: articleList,
     categories: filesByCategory,
-    // aboutMe: '/deploy/aboutMe/aboutMe.html',
 });
-
-// nav
-const navDir = '../deploy/nav';
-if (!fs.existsSync(navDir)) {
-    fs.mkdirSync(navDir);
-}
-
-// About Me
-const aboutMe = ejs.render(defaultTemplate, {
-    content: aboutMeTemplate,
-    header,
-    nav: navTemplate
-});
-
-fs.writeFileSync('../deploy/nav/aboutMe.html', aboutMe);
-
-// Study
-const study = ejs.render(defaultTemplate, {
-    content: studyTemplate,
-    header,
-    nav: navTemplate
-});
-
-fs.writeFileSync('../deploy/nav/study.html', study);
 
 const sideBar = ejs.render(sideBarTemplate, {
     categories: filesByCategory,
 });
 
 filesByCategory.map((category) => {
-    // category folder 생성
-    if (category.folder !== undefined) {
-        const categoryDir = `../deploy/${category.folder}`;
+    // category 별 folder 생성
+    if (category.categoryName !== undefined) {
+        const categoryDir = `../deploy/${category.categoryName}`;
         if (!fs.existsSync(categoryDir)) {
             fs.mkdirSync(categoryDir);
         }
@@ -191,62 +171,69 @@ filesByCategory.map((category) => {
         return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
     });
 
-    const articleList = ejs.render(listTemplate, {
+    const categoryArticleList = ejs.render(listTemplate, {
         files: orderdFiles,
         category: category.categoryName,
-        folder: category.folder
     });
 
-    const articleTemplate = ejs.render(defaultTemplate, {
-        content: articleList,
-        sideBar: sideBar,
+    const categoryArticleTemplate = ejs.render(defaultTemplate, {
+        content: categoryArticleList,
         header,
-        nav: navTemplate
+        nav: navTemplate,
+        sideBar: sideBar,
     });
 
-    console.log('category: ', category);
-    fs.writeFileSync(`../deploy/category/${category.folder}.html`, articleTemplate);
+    fs.writeFileSync(`../deploy/category/${category.categoryName}.html`, categoryArticleTemplate);
 
-    // file 별로 article page 생성
+    // category 안의 file 별로 article page 생성
     category.files.map(file => {
         console.log('file: ', file);
-        const path = `../deploy/${category.folder}/${file.fileNAme}`;
+        const path = `../deploy/${category.categoryName}/${file.fileName}`;
 
         const article = ejs.render(articleTemplate, {
             body: file.convertedBody,
-            introductionInfo: introductionInfo,
+            articleInfo: file.articleInfo,
             path: path
         });
 
-        const articleIndexHtml = ejs.render(defaultTemplate, {
+        const articleHtml = ejs.render(defaultTemplate, {
             content: article,
             header,
             nav: navTemplate,
             sideBar: sideBar,
         });
 
-        fs.writeFileSync(`../deploy/${category.folder}/${file.fileName}`, articleIndexHtml);
+        fs.writeFileSync(`../deploy/${category.categoryName}/${file.fileName}`, articleHtml);
     });
 });
 
-console.log('articles: ', articles);
-// 'Study' Screen
+// About Me Menu
+const aboutMe = ejs.render(defaultTemplate, {
+    content: aboutMeTemplate,
+    header,
+    nav: navTemplate
+});
+
+fs.writeFileSync('../deploy/nav/aboutMe.html', aboutMe);
+
+// Study Menu
 const orderdArticles = articles.sort((a, b) => {
     return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
 });
 console.log('orderdArticles: ', orderdArticles);
+
 const articleContent = ejs.render(articleListTemplate, {
     articles: orderdArticles
 });
 
-const studyMenuHtml = ejs.render(studyTemplate, {
+const studyHome = ejs.render(defaultTemplate, {
     content: articleContent,
     header,
     nav: navTemplate,
-    sideBar,
+    sideBar
 });
 
-// fs.writeFileSync(fs.writeFileSync(`../deploy/${category.folder}/${file.fileName}`, studyMenuHtml));
+fs.writeFileSync('../deploy/nav/studyHome.html', studyHome);
 
 const indexHtml = ejs.render(defaultTemplate, {
     content: aboutMeTemplate,
