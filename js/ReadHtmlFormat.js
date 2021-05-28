@@ -24,8 +24,6 @@ const sideBarTemplate = fs.readFileSync('../templates/sideBar.html', 'utf8');
 
 const aboutMeTemplate = fs.readFileSync("../templates/aboutMe.html", "utf8");
 
-// Study Menu
-const studyTemplate = fs.readFileSync("../templates/study.html", "utf8");
 
 module.exports = {
     defaultTemplate,
@@ -36,5 +34,4 @@ module.exports = {
     articleTemplate,
     sideBarTemplate,
     aboutMeTemplate,
-    studyTemplate
 };

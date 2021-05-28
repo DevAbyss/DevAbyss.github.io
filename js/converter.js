@@ -48,8 +48,7 @@ const {
     articleTemplate,
     sideBarTemplate,
     navTemplate,
-    articleListTemplate,
-    studyTemplate
+    articleListTemplate
 } = require("./ReadHtmlFormat");
 const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
 
@@ -138,8 +137,6 @@ directories.map((directory, index) => {
     filesByCategory.push(...files);
 });
 
-console.log('filesByCategory: ', filesByCategory);
-
 // Reading Introduction.md
 const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
 const introductionInfo = extractInfo(introductionFile);
@@ -148,7 +145,6 @@ const introductionInfo = extractInfo(introductionFile);
 // filesByCategory: [{categoryName: 'test1', files: [ [Object], [Object] ]}, {...}]
 const header = ejs.render(headerTemplate, {
     introductionInfo: introductionInfo,
-    //articleList: articleList,
     categories: filesByCategory,
 });
 
@@ -180,8 +176,9 @@ filesByCategory.map((category) => {
         content: categoryArticleList,
         header,
         nav: navTemplate,
-        sideBar: sideBar,
+        sideBar,
     });
+    console.log('categoryArticleTemplate: ', categoryArticleTemplate);
 
     fs.writeFileSync(`../deploy/category/${category.categoryName}.html`, categoryArticleTemplate);
 
@@ -200,7 +197,7 @@ filesByCategory.map((category) => {
             content: article,
             header,
             nav: navTemplate,
-            sideBar: sideBar,
+            sideBar,
         });
 
         fs.writeFileSync(`../deploy/${category.categoryName}/${file.fileName}`, articleHtml);
@@ -211,7 +208,8 @@ filesByCategory.map((category) => {
 const aboutMe = ejs.render(defaultTemplate, {
     content: aboutMeTemplate,
     header,
-    nav: navTemplate
+    nav: navTemplate,
+    sideBar
 });
 
 fs.writeFileSync('../deploy/nav/aboutMe.html', aboutMe);
