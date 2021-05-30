@@ -8,8 +8,8 @@ const defaultTemplate = fs.readFileSync(
     "utf8"
 );
 
-// Header&Navigation Template
-const headerTemplate = fs.readFileSync("../templates/header.html",
+// Navigation Template
+const navTemplate = fs.readFileSync("../templates/nav.html",
     "utf8");
 
 // Article Template
@@ -26,7 +26,7 @@ const aboutTemplate = fs.readFileSync("../templates/about.html", "utf8");
 
 module.exports = {
     defaultTemplate,
-    headerTemplate,
+    navTemplate,
     articleListTemplate,
     listTemplate,
     articleTemplate,

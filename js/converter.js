@@ -42,7 +42,7 @@ const md = require("markdown-it")({
 
 const {
     defaultTemplate,
-    headerTemplate,
+    navTemplate,
     aboutTemplate,
     listTemplate,
     articleTemplate,
@@ -140,14 +140,14 @@ const introductionInfo = extractInfo(introductionFile);
 
 // articleList: [{title: 'test3', date: '2021-03-11', path: '../deploy/asd/test3.html'}, {...}]
 // filesByCategory: [{categoryName: 'test1', files: [ [Object], [Object] ]}, {...}]
-const header = ejs.render(headerTemplate, {
+const nav = ejs.render(navTemplate, {
     introductionInfo: introductionInfo,
     categories: filesByCategory,
 });
 
-const sideBar = ejs.render(sideBarTemplate, {
-    categories: filesByCategory,
-});
+// const sideBar = ejs.render(sideBarTemplate, {
+//     categories: filesByCategory,
+// });
 
 filesByCategory.map((category) => {
     // category 별 folder 생성
@@ -171,8 +171,8 @@ filesByCategory.map((category) => {
 
     const categoryArticleTemplate = ejs.render(defaultTemplate, {
         content: categoryArticleList,
-        header,
-        sideBar,
+        nav,
+        // sideBar,
     });
 
     fs.writeFileSync(`../deploy/category/${category.categoryName}.html`, categoryArticleTemplate);
@@ -189,8 +189,8 @@ filesByCategory.map((category) => {
 
         const articleHtml = ejs.render(defaultTemplate, {
             content: article,
-            header,
-            sideBar,
+            nav,
+            // sideBar,
         });
 
         fs.writeFileSync(`../deploy/${category.categoryName}/${file.fileName}`, articleHtml);
@@ -200,8 +200,8 @@ filesByCategory.map((category) => {
 // About Me Menu
 const about = ejs.render(defaultTemplate, {
     content: aboutTemplate,
-    header,
-    sideBar
+    nav,
+    // sideBar
 });
 
 fs.writeFileSync('../deploy/nav/about.html', about);
@@ -218,16 +218,16 @@ const articleContent = ejs.render(articleListTemplate, {
 
 const studyHome = ejs.render(defaultTemplate, {
     content: articleContent,
-    header,
-    sideBar
+    nav,
+    // sideBar
 });
 
 fs.writeFileSync('../deploy/nav/studyHome.html', studyHome);
 
 const indexHtml = ejs.render(defaultTemplate, {
     content: aboutTemplate,
-    header,
-    sideBar,
+    nav,
+    // sideBar,
 });
 
 fs.writeFileSync("../index.html", indexHtml);

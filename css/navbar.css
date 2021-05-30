@@ -1,0 +1,36 @@
+@import url(./default.css);
+
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 15px 0;
+}
+
+nav .max-width {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav .logo a {
+  color: #565656;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+nav .menu li {
+  list-style: none;
+  display: inline-block;
+}
+
+nav .menu li a {
+  color: #565656;
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 25px;
+  transition: color 0.3s ease;
+}
+
+nav .menu li a:hover {
+  color: #50bcdf;
+}
