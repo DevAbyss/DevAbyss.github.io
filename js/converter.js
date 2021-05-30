@@ -102,7 +102,6 @@ directories.map((directory, index) => {
         ).replace(/(\s*)/g, '');
 
         let fileObj = {
-            //folder,
             categoryName,
             fileName,
             articleInfo,
@@ -123,7 +122,6 @@ directories.map((directory, index) => {
 
             if (findIndex === -1) {
                 files.push({
-                    //folder,
                     categoryName,
                     files: [fileObj]
                 });
@@ -164,7 +162,7 @@ filesByCategory.map((category) => {
     // category 별로 file의 list를 보여주는 category page 생성
     // files 최신순으로 정렬
     const orderdFiles = category.files.sort((a, b) => {
-        return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
+        return new Date(b.articleInfo.date) - new Date(a.articleInfo.date);
     });
 
     const categoryArticleList = ejs.render(listTemplate, {
@@ -178,13 +176,11 @@ filesByCategory.map((category) => {
         nav: navTemplate,
         sideBar,
     });
-    console.log('categoryArticleTemplate: ', categoryArticleTemplate);
 
     fs.writeFileSync(`../deploy/category/${category.categoryName}.html`, categoryArticleTemplate);
 
     // category 안의 file 별로 article page 생성
     category.files.map(file => {
-        console.log('file: ', file);
         const path = `../deploy/${category.categoryName}/${file.fileName}`;
 
         const article = ejs.render(articleTemplate, {
@@ -216,9 +212,9 @@ fs.writeFileSync('../deploy/nav/aboutMe.html', aboutMe);
 
 // Study Menu
 const orderdArticles = articles.sort((a, b) => {
-    return parseInt(b.articleInfo.date, 10) - parseInt(a.articleInfo.data, 10);
+    return new Date(b.articleInfo.date) - new Date(a.articleInfo.date);
 });
-console.log('orderdArticles: ', orderdArticles);
+
 
 const articleContent = ejs.render(articleListTemplate, {
     articles: orderdArticles
