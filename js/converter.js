@@ -43,11 +43,10 @@ const md = require("markdown-it")({
 const {
     defaultTemplate,
     headerTemplate,
-    aboutMeTemplate,
+    aboutTemplate,
     listTemplate,
     articleTemplate,
     sideBarTemplate,
-    navTemplate,
     articleListTemplate
 } = require("./ReadHtmlFormat");
 const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
@@ -173,7 +172,6 @@ filesByCategory.map((category) => {
     const categoryArticleTemplate = ejs.render(defaultTemplate, {
         content: categoryArticleList,
         header,
-        nav: navTemplate,
         sideBar,
     });
 
@@ -192,7 +190,6 @@ filesByCategory.map((category) => {
         const articleHtml = ejs.render(defaultTemplate, {
             content: article,
             header,
-            nav: navTemplate,
             sideBar,
         });
 
@@ -201,14 +198,13 @@ filesByCategory.map((category) => {
 });
 
 // About Me Menu
-const aboutMe = ejs.render(defaultTemplate, {
-    content: aboutMeTemplate,
+const about = ejs.render(defaultTemplate, {
+    content: aboutTemplate,
     header,
-    nav: navTemplate,
     sideBar
 });
 
-fs.writeFileSync('../deploy/nav/aboutMe.html', aboutMe);
+fs.writeFileSync('../deploy/nav/about.html', about);
 
 // Study Menu
 const orderdArticles = articles.sort((a, b) => {
@@ -223,16 +219,14 @@ const articleContent = ejs.render(articleListTemplate, {
 const studyHome = ejs.render(defaultTemplate, {
     content: articleContent,
     header,
-    nav: navTemplate,
     sideBar
 });
 
 fs.writeFileSync('../deploy/nav/studyHome.html', studyHome);
 
 const indexHtml = ejs.render(defaultTemplate, {
-    content: aboutMeTemplate,
+    content: aboutTemplate,
     header,
-    nav: navTemplate,
     sideBar,
 });
 

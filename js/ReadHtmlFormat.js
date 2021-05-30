@@ -11,7 +11,6 @@ const defaultTemplate = fs.readFileSync(
 // Header&Navigation Template
 const headerTemplate = fs.readFileSync("../templates/header.html",
     "utf8");
-const navTemplate = fs.readFileSync('../templates/nav.html');
 
 // Article Template
 const articleListTemplate = fs.readFileSync('../templates/articleList.html', 'utf8');
@@ -22,16 +21,15 @@ const articleTemplate = fs.readFileSync(
 );
 const sideBarTemplate = fs.readFileSync('../templates/sideBar.html', 'utf8');
 
-const aboutMeTemplate = fs.readFileSync("../templates/aboutMe.html", "utf8");
+const aboutTemplate = fs.readFileSync("../templates/about.html", "utf8");
 
 
 module.exports = {
     defaultTemplate,
     headerTemplate,
-    navTemplate,
     articleListTemplate,
     listTemplate,
     articleTemplate,
     sideBarTemplate,
-    aboutMeTemplate,
+    aboutTemplate,
 };
