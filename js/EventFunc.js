@@ -17,4 +17,5 @@ document.addEventListener("scroll", () => {
 
 document.addEventListener("click", () => {
   menu.classList.toggle("active");
+  menuBtn.classList.toggle("active");
 });

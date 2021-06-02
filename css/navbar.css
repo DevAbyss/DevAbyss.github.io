@@ -42,7 +42,6 @@ nav .menu li a:hover {
 
 .menu-btn {
   cursor: pointer;
-  font-size: 24px;
   display: none;
 }
 
@@ -81,5 +80,10 @@ nav .menu li a:hover {
   .menu-btn {
     display: block;
     z-index: 999;
+  }
+
+  .menu-btn.active {
+    content: url(../assets/cancel-white.png);
+    transition: none 0.3s ease;
   }
 }
