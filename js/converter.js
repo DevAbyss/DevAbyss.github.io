@@ -25,9 +25,9 @@ const md = require("markdown-it")({
         if (lang && hljs.getLanguage(lang)) {
             try {
                 return (
-                    '<pre class="hljs"><code>'
-                    + hljs.highlight(lang, str, true).value
-                    + '</code></pre>'
+                    '<pre class="hljs"><code>' +
+                    hljs.highlight(lang, str, true).value +
+                    "</code></pre>"
                 );
             } catch (error) {
                 console.log("md highlight error: ", error);
@@ -35,7 +35,9 @@ const md = require("markdown-it")({
         }
 
         return (
-            '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + "</code></pre>"
+            '<pre class="hljs"><code>' +
+            md.utils.escapeHtml(str) +
+            "</code></pre>"
         );
     },
 });
@@ -47,28 +49,32 @@ const {
     listTemplate,
     articleTemplate,
     sideBarTemplate,
-    articleListTemplate
+    articleListTemplate,
 } = require("./ReadHtmlFormat");
-const { extractInfo, extractBody, extractHtmlFileName } = require("./ExtractFunction");
+const {
+    extractInfo,
+    extractBody,
+    extractHtmlFileName,
+} = require("./ExtractFunction");
 
 // 'posts' folder 읽기
 const directoryPath = path.join(__dirname, "..", "posts");
 const directories = fs.readdirSync(directoryPath);
 
 // 'deploy' folder 생성
-const deployDir = path.join(__dirname, '..', 'deploy');
+const deployDir = path.join(__dirname, "..", "deploy");
 if (!fs.existsSync(deployDir)) {
     fs.mkdirSync(deployDir);
 }
 
 // 전체 'category' folder 생성
-const categoryDir = path.join(__dirname, '..', 'deploy/category');
+const categoryDir = path.join(__dirname, "..", "deploy/category");
 if (!fs.existsSync(categoryDir)) {
     fs.mkdirSync(categoryDir);
 }
 
 // 'nav' folder 생성
-const navDir = '../deploy/nav';
+const navDir = "../deploy/nav";
 if (!fs.existsSync(navDir)) {
     fs.mkdirSync(navDir);
 }
@@ -83,7 +89,10 @@ directories.map((directory, index) => {
     let files = [];
 
     fileList.map((file) => {
-        const mdFile = fs.readFileSync(`../posts/${directories[index]}/${file}`, 'utf-8');
+        const mdFile = fs.readFileSync(
+            `../posts/${directories[index]}/${file}`,
+            "utf-8"
+        );
 
         // 글 정보 추출
         const articleInfo = extractInfo(mdFile);
@@ -91,38 +100,41 @@ directories.map((directory, index) => {
         // md File을 HTML로 변환
         const convertedBody = md.render(extractBody(mdFile));
 
-        const categoryName = articleInfo.category && articleInfo.category.replace(/(^\s*)|(\s*$)/gi, '');
+        const categoryName =
+            articleInfo.category &&
+            articleInfo.category.replace(/(^\s*)|(\s*$)/gi, "");
 
         const folder =
-            articleInfo.category && articleInfo.category.toLocaleLowerCase().replace(/(\s*)/g, '');
+            articleInfo.category &&
+            articleInfo.category.toLocaleLowerCase().replace(/(\s*)/g, "");
 
         const fileName = (
-            file.slice(0, file.indexOf('.')).toLocaleLowerCase() + `.html`
-        ).replace(/(\s*)/g, '');
+            file.slice(0, file.indexOf(".")).toLocaleLowerCase() + `.html`
+        ).replace(/(\s*)/g, "");
 
         let fileObj = {
             categoryName,
             fileName,
             articleInfo,
-            convertedBody
+            convertedBody,
         };
 
         // Array.prototype.findIndex();
         // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스 반환
         // 만족하는 요소가 없으면 -1을 반환
-        let findIndex = files.findIndex(i => i.categoryName === categoryName);
+        let findIndex = files.findIndex((i) => i.categoryName === categoryName);
 
         if (articleInfo.category) {
             articleList.push({
                 title: articleInfo.title,
                 date: articleInfo.date,
-                path: `../deploy/${folder}/${fileName}`
+                path: `../deploy/${folder}/${fileName}`,
             });
 
             if (findIndex === -1) {
                 files.push({
                     categoryName,
-                    files: [fileObj]
+                    files: [fileObj],
                 });
             } else {
                 files[findIndex].files.push(fileObj);
@@ -135,7 +147,7 @@ directories.map((directory, index) => {
 });
 
 // Reading Introduction.md
-const introductionFile = fs.readFileSync('../Introduction.md', 'utf8');
+const introductionFile = fs.readFileSync("../Introduction.md", "utf8");
 const introductionInfo = extractInfo(introductionFile);
 
 // articleList: [{title: 'test3', date: '2021-03-11', path: '../deploy/asd/test3.html'}, {...}]
@@ -175,16 +187,19 @@ filesByCategory.map((category) => {
         // sideBar,
     });
 
-    fs.writeFileSync(`../deploy/category/${category.categoryName}.html`, categoryArticleTemplate);
+    fs.writeFileSync(
+        `../deploy/category/${category.categoryName}.html`,
+        categoryArticleTemplate
+    );
 
     // category 안의 file 별로 article page 생성
-    category.files.map(file => {
+    category.files.map((file) => {
         const path = `../deploy/${category.categoryName}/${file.fileName}`;
 
         const article = ejs.render(articleTemplate, {
             body: file.convertedBody,
             articleInfo: file.articleInfo,
-            path: path
+            path: path,
         });
 
         const articleHtml = ejs.render(defaultTemplate, {
@@ -193,7 +208,10 @@ filesByCategory.map((category) => {
             // sideBar,
         });
 
-        fs.writeFileSync(`../deploy/${category.categoryName}/${file.fileName}`, articleHtml);
+        fs.writeFileSync(
+            `../deploy/${category.categoryName}/${file.fileName}`,
+            articleHtml
+        );
     });
 });
 
@@ -204,25 +222,24 @@ const about = ejs.render(defaultTemplate, {
     // sideBar
 });
 
-fs.writeFileSync('../deploy/nav/about.html', about);
+fs.writeFileSync("../deploy/nav/about.html", about);
 
 // Study Menu
 const orderdArticles = articles.sort((a, b) => {
     return new Date(b.articleInfo.date) - new Date(a.articleInfo.date);
 });
 
-
 const articleContent = ejs.render(articleListTemplate, {
-    articles: orderdArticles
+    articles: orderdArticles,
 });
 
-const studyHome = ejs.render(defaultTemplate, {
+const study = ejs.render(defaultTemplate, {
     content: articleContent,
     nav,
     // sideBar
 });
 
-fs.writeFileSync('../deploy/nav/studyHome.html', studyHome);
+fs.writeFileSync("../deploy/nav/study.html", study);
 
 const indexHtml = ejs.render(defaultTemplate, {
     content: aboutTemplate,
