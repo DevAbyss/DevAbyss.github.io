@@ -7,102 +7,60 @@
         <title>DevAbyss Blog</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="/css/reset.css" />
-        <link rel="stylesheet" href="/css/default.css" />
-        <link rel="stylesheet" href="/css/navbar.css" />
-        <link rel="stylesheet" href="/css/about.css" />
         <link
             rel="stylesheet"
             href="/node_modules/highlight.js/styles/github.css"
         />
+        <link rel="stylesheet" href="../css/main.css" />
+        <link
+            rel="stylesheet"
+            media="(max-width: 1024px)"
+            href="../css/main_medium.css"
+        />
+        <link
+            rel="stylesheet"
+            media="(max-width: 768px)"
+            href="../css/main_small.css"
+        />
 
         <!-- JAVASCRIPT -->
-        <script src="/js/EventFunc.js" defer></script>
+        <script defer src="/js/EventFunc.js" defer></script>
     </head>
-
     <body>
-        <!-- Default Template -->
-
         <!-- Navigation -->
-        <header id="navbar"><a href="#">
-    <span>DevAbyss</span>
-</a>
-<div class="nav-container">
-    <div class="search-box">
-        <input type="text" />
-    </div>
-    <nav class="nav-items">
-        <div class="nav-item">
-            <a href="#">Home</a>
+        <header class="section"><div class="container">
+    <!-- left group -->
+    <div class="left-group">
+        <div class="logo">
+            <a href="#">
+                <img src="../assets/logo_light.png" alt="logo" />
+            </a>
         </div>
-        <div class="nav-item">
-            <a href="#">Study</a>
-        </div>
-        <div class="nav-item">
-            <a href="#">개발일기</a>
-        </div>
-        <div class="nav-item">
-            <div class="dropdown-wrapper">
-                <button type="button" class="dropdown-title">
-                    <span>Info</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-</div>
-<!-- <nav class="nav bd-grid">
-    <div>
-        <a href="/deploy/nav/about.html" class="nav_logo">DevAbyss</a>
-    </div>
-
-    <div class="nav_menu" id="nav-menu">
-        <ul class="nav_list">
-            <li class="nav_item">
-                <a href="/deploy/nav/about.html" class="nav_link">About</a>
-            </li>
-            <li class="nav_item">
-                <a href="/deploy/nav/career.html" class="nav_link">Career</a>
-            </li>
-            <li class="nav_item">
-                <a href="/deploy/nav/project.html" class="nav_link">Project</a>
-            </li>
-            <li class="nav_item">
-                <a href="/deploy/nav/studyHome.html" class="nav_link">Study</a>
-            </li>
+        <ul class="main-menu toggle">
+            <li><a href="/deploy/nav/about.html">About</a></li>
+            <li><a href="/deploy/nav/work.html">Work</a></li>
+            <li><a href="/deploy/nav/studyHome.html">Study</a></li>
+            <li><a href="#">개발일기</a></li>
         </ul>
     </div>
 
-    <div class="nav_toggle" id="nav-toggle">
-        <i class="bx bx-menu"></i>
+    <!-- right group -->
+    <div class="right-group toggle">
+        <form id="search-form" method="POST" action="">
+            <input
+                type="text"
+                id="search"
+                class="input--text"
+                placeholder="Search GitHub"
+            />
+            <input type="submit" value="Submit" />
+        </form>
     </div>
-</nav> -->
 
-<!-- <div class="max-width">
-  <div class="logo">
-    <a href="/deploy/nav/about.html" class="nav_logo"
-      >DevAbyss</a
-    >
-  </div>
-
-  <ul class="menu">
-    <li class="nav_item">
-      <a href="/deploy/nav/about.html" class="nav_link">About</a>
-    </li>
-    <li class="nav_item">
-      <a href="/deploy/nav/work.html" class="nav_link">Work</a>
-    </li>
-    <li class="nav_item">
-      <a href="/deploy/nav/project.html" class="nav_link">Project</a>
-    </li>
-    <li class="nav_item">
-      <a href="/deploy/nav/studyHome.html" class="nav_link">Study</a>
-    </li>
-  </ul>
-
-  <div class="menu-btn">
-    <img src="../assets/menu-dark.png" alt="" />
-  </div>
-</div> -->
+    <div id="toggle-btn">
+        <img src="../assets/menu_light.png" alt="menu-toggle" />
+    </div>
+</div>
 </header>
 
         <section class="content-section"><div class="article">

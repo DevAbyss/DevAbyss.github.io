@@ -1,0 +1,50 @@
+/* 
+  # @media
+  # 다양한 미디어 유형이나 장치에 따라, 서로 다른 스타일 규칙을 적용
+  # 사용법
+  # @media 미디어타입 and (미디어특성) {
+  #   CSS 코드
+  # }
+  # 예시
+  # @media screen and (max-width: 1200px) {
+  #   body {
+  #     color: red;
+  #   }
+  # }
+  
+  # 미디어 타입
+  #   생략 가능
+  #   1. all: 모든 미디어 타입에 적용 (default)
+  #   2. screen: 컴퓨터 화면, 태블릿, 스마트폰 등
+  #   3. print: 인쇄 전용
+  # 미디어 특성
+  #   1. width: viewport 가로 너비
+  #   2. max-width: viewport 최대 가로 너비 (이하)
+  #   3. min-width: viewport 최소 가로 너비 (이상)
+  #   4. height: viewport 세로 너비
+  #   5. max-height: viewport 최대 세로 너비 (이하)
+  #   6. min-height: viewport 최소 세로 너비 (이상)
+  #   7. orientation: viewport 방향(portrait, landscape)
+  #       - portrait: 세로 너비가 가로 너비보다 커지면
+  #       - landscape: 가로 너비가 세로 너비보다 커지면
+  #   8. 기타 다른 특성들...
+  # media options - 디바이스 종류에 따른 단위는 '기획/디자인'단계에서 결정하는 것이 효과적
+  # Large Device: Desktop, 1024px 이상
+  # Medium Device: Tablet, 1024px 이하
+  # Small Device: Tablet+Phone, 768px 이하
+*/
+
+/* HEADER */
+header .toggle {
+    display: none;
+}
+
+header .toggle.on {
+    display: block;
+}
+
+#toggle-btn {
+    display: block;
+    position: absolute;
+    cursor: pointer;
+}

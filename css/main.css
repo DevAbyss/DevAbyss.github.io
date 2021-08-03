@@ -1,0 +1,116 @@
+/* GOOGLE FONT */
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap");
+
+:root {
+    --body-font: "Nanum Myeongjo", serif;
+}
+
+/* COMMON */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    font-family: "Roboto", "sans-serif";
+    /* Browser에서 제공하는 기본 font-size는 16px */
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    scroll-behavior: smooth;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* SECTION & CONTAINER */
+.section {
+    position: relative;
+}
+
+.section .container {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 1800px;
+    /* width가 정의돼 있으면 margin: 0 auto를 이용해 중앙 정렬 가능 */
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    padding: 0 50px;
+    background: #fff;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+header .container {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header .left-group {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .logo {
+    margin-right: 50px;
+}
+
+header .logo a img {
+    display: block;
+    width: 150px;
+    height: 60px;
+}
+
+header .main-menu {
+    display: flex;
+}
+
+header .main-menu li a {
+    display: block;
+    color: #3c4146;
+    padding: 10px;
+}
+
+header .main-menu li a:hover {
+    color: #4078c0;
+}
+
+header .right-group {
+    display: flex;
+    align-items: center;
+}
+
+#search-form {
+    margin-right: 12px;
+}
+
+#search {
+    width: 160px;
+    font-size: 12px;
+}
+
+#search + [type="submit"] {
+    display: none;
+}
+
+#toggle-btn {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+}

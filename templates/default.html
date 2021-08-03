@@ -7,24 +7,28 @@
         <title>DevAbyss Blog</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="/css/reset.css" />
-        <link rel="stylesheet" href="/css/default.css" />
-        <link rel="stylesheet" href="/css/navbar.css" />
-        <link rel="stylesheet" href="/css/about.css" />
         <link
             rel="stylesheet"
             href="/node_modules/highlight.js/styles/github.css"
         />
+        <link rel="stylesheet" href="../css/main.css" />
+        <link
+            rel="stylesheet"
+            media="(max-width: 1024px)"
+            href="../css/main_medium.css"
+        />
+        <link
+            rel="stylesheet"
+            media="(max-width: 768px)"
+            href="../css/main_small.css"
+        />
 
         <!-- JAVASCRIPT -->
-        <script src="/js/EventFunc.js" defer></script>
+        <script defer src="/js/EventFunc.js" defer></script>
     </head>
-
     <body>
-        <!-- Default Template -->
-
         <!-- Navigation -->
-        <header id="navbar"><%-nav%></header>
+        <header class="section"><%-nav%></header>
 
         <section class="content-section"><%-content%></section>
     </body>
