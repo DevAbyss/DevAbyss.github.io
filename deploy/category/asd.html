@@ -12,7 +12,7 @@
             href="/node_modules/highlight.js/styles/github.css"
         />
         <link rel="stylesheet" href="../css/main.css" />
-        <link
+        <!-- <link
             rel="stylesheet"
             media="(max-width: 1024px)"
             href="../css/main_medium.css"
@@ -21,15 +21,76 @@
             rel="stylesheet"
             media="(max-width: 768px)"
             href="../css/main_small.css"
-        />
+        /> -->
 
         <!-- JAVASCRIPT -->
         <script defer src="/js/EventFunc.js" defer></script>
     </head>
     <body>
-        <!-- Navigation -->
-        <header class="section"><div class="container">
-    <!-- left group -->
+        <!-- HEADER -->
+        <header class="header" id="header">
+    <nav class="nav container">
+        <a href="#" class="nav_logo">
+            <img class="logo" src="../assets/logo_light.png" alt="" />
+        </a>
+        <div class="nav_menu" id="nav_menu">
+            <ul class="nav_list grid">
+                <li class="nav_item">
+                    <a href="/deploy/nav/about.html" class="nav_link">
+                        <img
+                            class="nav_icon"
+                            src="../assets/home_light.png"
+                            alt=""
+                        />
+                        About
+                    </a>
+                </li>
+                <li class="nav_item">
+                    <a href="/deploy/nav/work.html" class="nav_link">
+                        <img
+                            class="nav_icon"
+                            src="../assets/company_light.png"
+                            alt=""
+                        />
+                        Work
+                    </a>
+                </li>
+                <li class="nav_item">
+                    <a href="/deploy/nav/studyHome.html" class="nav_link">
+                        <img
+                            class="nav_icon"
+                            src="../assets/dictionary_light.png"
+                            alt=""
+                        />
+                        Study
+                    </a>
+                </li>
+                <li class="nav_item">
+                    <a href="#" class="nav_link">
+                        <img
+                            class="nav_icon"
+                            src="../assets/developer_light.png"
+                            alt=""
+                        />
+                        개발일기
+                    </a>
+                </li>
+            </ul>
+            <img
+                id="nav_close"
+                class="nav_icon"
+                src="../assets/cancel_light.png"
+                alt=""
+            />
+        </div>
+        <div class="nav_btns">
+            <div class="nav_toggle" id="nav_toggle">
+                <img class="nav_icon" src="../assets/menu_light.png" alt="" />
+            </div>
+        </div>
+    </nav>
+</header>
+<!-- <header id="header" class="header">
     <div class="left-group">
         <div class="logo">
             <a href="#">
@@ -44,7 +105,6 @@
         </ul>
     </div>
 
-    <!-- right group -->
     <div class="right-group toggle">
         <form id="search-form" method="POST" action="">
             <input
@@ -60,8 +120,8 @@
     <div id="toggle-btn">
         <img src="../assets/menu_light.png" alt="menu-toggle" />
     </div>
-</div>
-</header>
+</header> -->
+
 
         <section class="content-section"><div class="list">
     <div class="title">
