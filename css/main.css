@@ -1,5 +1,5 @@
 /* GOOGLE FONT */
-@import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap"); */
 
 /* VARIABLES CSS */
 :root {
@@ -18,7 +18,7 @@
     --container-color: #fff;
 
     /* Font and typography */
-    --body-font: "Nanum Myeongjo", serif;
+    /* --body-font: "Nanum Myeongjo", serif; */
 
     /* Font Size */
     /* --big-font-size: 2rem;
@@ -58,7 +58,7 @@
 
 /* COMMON */
 * {
-    font-family: "Nanum Myeongjo", serif;
+    /* font-family: "Nanum Myeongjo", serif; */
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -69,7 +69,7 @@ html {
 }
 
 body {
-    font-family: var(--body-font);
+    /* font-family: var(--body-font); */
     font-size: var(--normal-font-size);
     background-color: var(--body-color);
     color: var(--text-color);
@@ -158,22 +158,13 @@ header {
 }
 
 .nav_toggle {
-    font-size: 1.1rem;
     cursor: pointer;
-}
-
-.nav_toggle:hover {
-    color: var(--first-color);
-}
-
-.logo {
-    width: 150px;
-    height: 60px;
 }
 
 .nav_icon {
     width: 20px;
     height: 20px;
+    margin-bottom: 5px;
 }
 
 .nav_list {
@@ -190,20 +181,21 @@ header {
     font-weight: var(--font-medium);
 }
 
-.nav_link:hover {
-    color: var(--first-color);
-}
-
 @media screen and (max-width: 767px) {
     .nav_menu {
         position: fixed;
-        bottom: 0;
+        bottom: -100%;
         left: 0;
         width: 100%;
         background-color: var(--body-color);
-        padding: 2rem 1.5rem 4rem;
+        padding: 1.5rem;
         box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
         border-radius: 1.5rem 1.5rem;
         transition: 0.3s;
     }
+}
+
+/* Show Menu */
+.show_menu {
+    bottom: 0;
 }

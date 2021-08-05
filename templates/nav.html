@@ -1,15 +1,15 @@
 <header class="header" id="header">
     <nav class="nav container">
-        <a href="#" class="nav_logo">
-            <img class="logo" src="../assets/logo_light.png" alt="" />
-        </a>
+        <a href="#" class="nav_logo"> DevAbyss </a>
         <div class="nav_menu" id="nav_menu">
             <ul class="nav_list grid">
                 <li class="nav_item">
                     <a href="/deploy/nav/about.html" class="nav_link">
                         <img
                             class="nav_icon"
-                            src="../assets/home_light.png"
+                            src="../assets/user_light.png"
+                            onmouseover="this.src='../assets/user_hover.png'"
+                            onmouseout="this.src='../assets/user_light.png'"
                             alt=""
                         />
                         About
@@ -19,7 +19,9 @@
                     <a href="/deploy/nav/work.html" class="nav_link">
                         <img
                             class="nav_icon"
-                            src="../assets/company_light.png"
+                            src="../assets/work_light.png"
+                            onmouseover="this.src='../assets/work_hover.png'"
+                            onmouseout="this.src='../assets/work_light.png'"
                             alt=""
                         />
                         Work
@@ -29,7 +31,9 @@
                     <a href="/deploy/nav/studyHome.html" class="nav_link">
                         <img
                             class="nav_icon"
-                            src="../assets/dictionary_light.png"
+                            src="../assets/study_light.png"
+                            onmouseover="this.src='../assets/study_hover.png'"
+                            onmouseout="this.src='../assets/study_light.png'"
                             alt=""
                         />
                         Study
@@ -39,23 +43,37 @@
                     <a href="#" class="nav_link">
                         <img
                             class="nav_icon"
-                            src="../assets/developer_light.png"
+                            src="../assets/code_light.png"
+                            onmouseover="this.src='../assets/code_hover.png'"
+                            onmouseout="this.src='../assets/code_light.png'"
                             alt=""
                         />
                         개발일기
                     </a>
                 </li>
+                <li class="nav_item">
+                    <a href="#" class="nav_link">
+                        <img
+                            class="nav_icon"
+                            src="../assets/cancel_light.png"
+                            onmouseover="this.src='../assets/cancel_hover.png'"
+                            onmouseout="this.src='../assets/cancel_light.png'"
+                            alt=""
+                        />
+                        닫기
+                    </a>
+                </li>
             </ul>
-            <img
-                id="nav_close"
-                class="nav_icon"
-                src="../assets/cancel_light.png"
-                alt=""
-            />
         </div>
         <div class="nav_btns">
             <div class="nav_toggle" id="nav_toggle">
-                <img class="nav_icon" src="../assets/menu_light.png" alt="" />
+                <img
+                    class="nav_icon"
+                    src="../assets/menu_light.png"
+                    onmouseover="this.src='../assets/menu_hover.png'"
+                    onmouseout="this.src='../assets/menu_light.png'"
+                    alt=""
+                />
             </div>
         </div>
     </nav>
