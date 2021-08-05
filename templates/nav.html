@@ -1,6 +1,6 @@
 <header class="header" id="header">
     <nav class="nav container">
-        <a href="#" class="nav_logo"> DevAbyss </a>
+        <a href="#" class="nav_logo">DevAbyss</a>
         <div class="nav_menu" id="nav_menu">
             <ul class="nav_list grid">
                 <li class="nav_item">
@@ -54,9 +54,17 @@
             </ul>
         </div>
         <div class="nav_btns">
+            <!-- 테마 변경 버튼 -->
+            <img
+                class="change_theme"
+                id="theme_btn"
+                src="../assets/dark.png"
+                alt=""
+            />
             <div class="nav_toggle" id="nav_toggle">
+                <!-- 메뉴 토글 버튼 -->
                 <img
-                    class="nav_icon"
+                    class="toggle_icon"
                     src="../assets/menu_light.png"
                     onmouseover="this.src='../assets/menu_hover.png'"
                     onmouseout="this.src='../assets/menu_light.png'"
@@ -66,34 +74,3 @@
         </div>
     </nav>
 </header>
-<!-- <header id="header" class="header">
-    <div class="left-group">
-        <div class="logo">
-            <a href="#">
-                <img src="../assets/logo_light.png" alt="logo" />
-            </a>
-        </div>
-        <ul class="main-menu toggle">
-            <li><a href="/deploy/nav/about.html">About</a></li>
-            <li><a href="/deploy/nav/work.html">Work</a></li>
-            <li><a href="/deploy/nav/studyHome.html">Study</a></li>
-            <li><a href="#">개발일기</a></li>
-        </ul>
-    </div>
-
-    <div class="right-group toggle">
-        <form id="search-form" method="POST" action="">
-            <input
-                type="text"
-                id="search"
-                class="input--text"
-                placeholder="Search GitHub"
-            />
-            <input type="submit" value="Submit" />
-        </form>
-    </div>
-
-    <div id="toggle-btn">
-        <img src="../assets/menu_light.png" alt="menu-toggle" />
-    </div>
-</header> -->

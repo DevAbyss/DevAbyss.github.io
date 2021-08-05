@@ -1,90 +1,72 @@
 /**
- * MENU SHOW Y HIDDEN
+ * 메뉴 visible 및 hide
  */
 const navMenu = document.getElementById("nav_menu");
 const navToggle = document.getElementById("nav_toggle");
 const navClose = document.getElementById("nav_close");
+const navLink = document.querySelectorAll(".nav_link");
 
-// 메뉴 보이기
 if (navToggle) {
     navToggle.addEventListener("click", () => {
         navMenu.classList.add("show_menu");
     });
 }
 
-// 메뉴 감추기
 if (navClose) {
     navClose.addEventListener("click", () => {
         navMenu.classList.remove("show_menu");
     });
 }
 
-// Remove Menu Mobile
-const navLink = document.querySelectorAll(".nav_link");
-
 function linkAction() {
-    // When we click on each nav_link, we remove the show-menu class
     navMenu.classList.remove("show_menu");
 }
 
 navLink.forEach((item) => item.addEventListener("click", linkAction));
 
-// ! IIFE(Immediately-invoked function expression: 즉시 호출되는 함수 표현식
-// Pure Javascript에서 사용
-// # 사용하는 이유
-// # 1. 코드 사이의 충돌 예방: 다른 코드, 변수, 함수명 등이 충돌하지 않도록 예방
-// # 2. 전역 변수, 전역 함수가 되지 않도록 방지
-// # 3. 변수의 값을 즉시 할당
-// (function (window, document) {
-//     "use strict";
+/**
+ * Scroll Top
+ */
+function scrollUp() {
+    const scrollUp = document.getElementById("scroll_up");
 
-//     const toggles = document.querySelectorAll(".toggle"); // NodeList (유사배열)
-//     const toggleBtn = document.getElementById("toggle-btn");
+    if (this.scrollY >= 200) {
+        scrollUp.classList.add("show_scroll");
+    } else {
+        scrollUp.classList.remove("show_scroll");
+    }
+}
 
-//     toggleBtn.addEventListener("click", () => {
-//         toggleElements();
-//     });
+window.addEventListener("scroll", scrollUp);
 
-//     function toggleElements() {
-//         // .toggle의 개수가 바뀔 수 있기 때문에 forEach 사용
-//         [].forEach.call(toggles, (toggle) => {
-//             toggle.classList.toggle("on");
-//         });
-//     }
+/**
+ * Dark Theme
+ */
+const themeBtn = document.getElementById("theme_btn");
+const darkTheme = "dark_theme";
+const iconTheme = "bx_sun";
 
-//     window.addEventListener("resize", () => {
-//         if (window.innerWidth > 1024) {
-//             // off toggle element
-//             offElements();
-//         }
-//     });
+const selectedTheme = localStorage.getItem("selected-theme");
+const selectedIcon = localStorage.getItem("selected-icon");
 
-//     function offElements() {
-//         // .toggle의 개수가 바뀔 수 있기 때문에 forEach 사용
-//         [].forEach.call(toggles, (toggle) => {
-//             toggle.classList.remove("on");
-//         });
-//     }
-// })(window, document);
+const getCurrentTheme = () =>
+    document.body.classList.contains(darkTheme) ? "dark" : "light";
 
-// "use strict";
+const getCurrentIcon = () =>
+    themeBtn.classList.contains(iconTheme) ? "bx-moon" : "bx-sun";
 
-// const navBar = document.querySelector(".nav");
-// const menu = document.querySelector("nav .menu");
-// const menuBtn = document.querySelector(".menu-btn");
+if (selectedTheme) {
+    document.body.classList[selectedTheme === "dark" ? "add" : "remove"](
+        darkTheme
+    );
+    themeBtn.classList[selectedIcon === "bx-moon" ? "add" : "remove"](
+        iconTheme
+    );
+}
 
-// // ScrollY Event
-// document.addEventListener("scroll", () => {
-//   if (window.pageYOffset > 80) {
-//     console.log("add 실행");
-//     navBar.classList.add("sticky");
-//   } else {
-//     console.log("remove 실행");
-//     navBar.classList.remove("sticky");
-//   }
-// });
-
-// document.addEventListener("click", () => {
-//   menu.classList.toggle("active");
-//   menuBtn.classList.toggle("active");
-// });
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle(darkTheme);
+    themeBtn.classList.toggle("iconTheme");
+    localStorage.setItem("selected-theme", getCurrentTheme());
+    localStorage.setItem("selected-icon", getCurrentIcon());
+});

@@ -11,16 +11,16 @@
             rel="stylesheet"
             href="/node_modules/highlight.js/styles/github.css"
         />
-        <link rel="stylesheet" href="../css/main.css" />
+        <link rel="stylesheet" href="../css/style.css" />
         <!-- <link
             rel="stylesheet"
             media="(max-width: 1024px)"
-            href="../css/main_medium.css"
+            href="../css/style_medium.css"
         />
         <link
             rel="stylesheet"
             media="(max-width: 768px)"
-            href="../css/main_small.css"
+            href="../css/style_small.css"
         /> -->
 
         <!-- JAVASCRIPT -->
@@ -30,7 +30,7 @@
         <!-- HEADER -->
         <header class="header" id="header">
     <nav class="nav container">
-        <a href="#" class="nav_logo"> DevAbyss </a>
+        <a href="#" class="nav_logo">DevAbyss</a>
         <div class="nav_menu" id="nav_menu">
             <ul class="nav_list grid">
                 <li class="nav_item">
@@ -84,9 +84,17 @@
             </ul>
         </div>
         <div class="nav_btns">
+            <!-- 테마 변경 버튼 -->
+            <img
+                class="change_theme"
+                id="theme_btn"
+                src="../assets/dark.png"
+                alt=""
+            />
             <div class="nav_toggle" id="nav_toggle">
+                <!-- 메뉴 토글 버튼 -->
                 <img
-                    class="nav_icon"
+                    class="toggle_icon"
                     src="../assets/menu_light.png"
                     onmouseover="this.src='../assets/menu_hover.png'"
                     onmouseout="this.src='../assets/menu_light.png'"
@@ -96,37 +104,6 @@
         </div>
     </nav>
 </header>
-<!-- <header id="header" class="header">
-    <div class="left-group">
-        <div class="logo">
-            <a href="#">
-                <img src="../assets/logo_light.png" alt="logo" />
-            </a>
-        </div>
-        <ul class="main-menu toggle">
-            <li><a href="/deploy/nav/about.html">About</a></li>
-            <li><a href="/deploy/nav/work.html">Work</a></li>
-            <li><a href="/deploy/nav/studyHome.html">Study</a></li>
-            <li><a href="#">개발일기</a></li>
-        </ul>
-    </div>
-
-    <div class="right-group toggle">
-        <form id="search-form" method="POST" action="">
-            <input
-                type="text"
-                id="search"
-                class="input--text"
-                placeholder="Search GitHub"
-            />
-            <input type="submit" value="Submit" />
-        </form>
-    </div>
-
-    <div id="toggle-btn">
-        <img src="../assets/menu_light.png" alt="menu-toggle" />
-    </div>
-</header> -->
 
 
         <!-- MAIN -->
@@ -218,14 +195,40 @@
                     <!-- EXPERIENCE CONTENT -->
                     <div class="ex_content">
                         <div class="ex_data">
+                            <div></div>
+                            <div>
+                                <span class="ex_rounder"></span>
+                                <span class="ex_line"></span>
+                            </div>
                             <div>
                                 <h3 class="ex_title">Java Developer</h3>
                                 <span class="ex_subtitle">케이스마트피아</span>
                                 <div class="ex_calendar">
                                     <img
+                                        class="ex_icon"
                                         src="../assets/calendar_light.png"
                                         alt=""
                                     />
+                                    2017.06 ~ 2018.07
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ex_data">
+                            <div></div>
+                            <div>
+                                <span class="ex_rounder"></span>
+                                <span class="ex_line"></span>
+                            </div>
+                            <div>
+                                <h3 class="ex_title">Front-End Developer</h3>
+                                <span class="ex_subtitle">클로마운트</span>
+                                <div class="ex_calendar">
+                                    <img
+                                        class="ex_icon"
+                                        src="../assets/calendar_light.png"
+                                        alt=""
+                                    />
+                                    2020.12 ~ 2021.07
                                 </div>
                             </div>
                         </div>
@@ -269,5 +272,13 @@ test</p>
 
     </div>
 </div></section>
+
+        <a href="#" class="scrollup" id="scroll_up">
+            <img
+                class="scrollup_icon"
+                src="../assets/upward_arrow.png"
+                alt=""
+            />
+        </a>
     </body>
 </html>

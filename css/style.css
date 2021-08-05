@@ -56,6 +56,30 @@
     --z-modal: 1000;
 }
 
+/* Variables Dark Theme */
+body.dark_theme {
+    /* Colors */
+    --first-color-second: #0e0e0e;
+    --title-color: #f1f1f1;
+    --text-color: #bababa;
+    --input-color: #1d1d1d;
+    --body-color: #161616;
+    --container-color: #1d1d1d;
+}
+
+/* Btn Light/Dark */
+.nav_btns {
+    display: flex;
+    align-items: center;
+}
+
+.change_theme {
+    width: 20px;
+    height: 20px;
+    margin-right: var(--sp-1);
+    cursor: pointer;
+}
+
 /* COMMON */
 * {
     /* font-family: "Nanum Myeongjo", serif; */
@@ -137,6 +161,7 @@ header {
     left: 0;
     z-index: var(--z-fixed);
     background-color: var(--body-color);
+    border-top: 1px solid #000;
 }
 
 /* NAV */
@@ -166,6 +191,11 @@ header {
     width: 20px;
     height: 20px;
     margin-bottom: 10px;
+}
+
+.toggle_icon {
+    width: 20px;
+    height: 20px;
 }
 
 .nav_list {
@@ -260,3 +290,30 @@ header {
 }
 
 /* EXPERIENCE */
+.ex_icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Scroll Up */
+.scrollup {
+    position: fixed;
+    right: 1rem;
+    bottom: -20%;
+    z-index: var(--z-tooltip);
+    transition: 0.3s;
+}
+
+.show_scroll {
+    bottom: 5rem;
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+    width: 0.6rem;
+    /* background-color: #d3d3d3; */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #a1a1a1;
+}
