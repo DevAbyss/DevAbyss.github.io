@@ -34,7 +34,7 @@
         <main class="main">
             <section class="home section" id="home">
                 <h2 class="section_title">About Me</h2>
-                <span class="section_subtitle"> My Introduction </span>
+                <span class="section_subtitle">My Introduction</span>
                 <div class="home_container container grid">
                     <div class="home_content grid">
                         <div class="home_social">
@@ -88,10 +88,51 @@
             </section>
         </main>
 
-        <!-- ABOUT -->
-        <section class="about section" id="about">
-            <h2 class="section_title">About Me</h2>
-            <span class="section_subtitle"> My Introduction </span>
+        <!-- EXPERIENCE -->
+        <section class="experience section">
+            <h2 class="section_title">Experience</h2>
+            <span class="section_subtitle">Education & Work</span>
+            <div class="experience_container container">
+                <div class="experience_tabs">
+                    <div class="ex_btn btn_flex">
+                        <img
+                            class="ex_icon"
+                            src="../assets/edu_light.png"
+                            onmouseover="this.src='../assets/edu_hover.png'"
+                            onmouseout="this.src='../assets/edu_light.png'"
+                            alt=""
+                        />
+                        Education
+                    </div>
+                    <div class="ex_btn btn_flex">
+                        <img
+                            class="ex_icon"
+                            src="../assets/work_light.png"
+                            onmouseover="this.src='../assets/work_hover.png'"
+                            onmouseout="this.src='../assets/work_light.png'"
+                            alt=""
+                        />
+                        Work
+                    </div>
+                </div>
+                <div class="ex_sections">
+                    <!-- EXPERIENCE CONTENT -->
+                    <div class="ex_content">
+                        <div class="ex_data">
+                            <div>
+                                <h3 class="ex_title">Java Developer</h3>
+                                <span class="ex_subtitle">케이스마트피아</span>
+                                <div class="ex_calendar">
+                                    <img
+                                        src="../assets/calendar_light.png"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="content-section"><%-content%></section>

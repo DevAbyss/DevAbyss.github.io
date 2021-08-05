@@ -104,12 +104,13 @@ img {
 
 .section_title {
     font-size: var(--h1-font-size);
+    margin-bottom: var(--sp-0-5);
 }
 
 .section_subtitle {
     display: block;
-    font-size: var(--small-font-size);
-    /* margin-bottom: var(--sp-3); */
+    font-size: 14px;
+    margin-bottom: var(--sp-1);
 }
 
 .section_title,
@@ -207,7 +208,7 @@ header {
 
 .home_content {
     grid-template-columns: 0.5fr 3fr;
-    padding-top: 1.5rem;
+    padding-top: 1.5ㅎrem;
     align-items: center;
 }
 
@@ -257,3 +258,5 @@ header {
     font-size: 12px;
     margin-bottom: 5px;
 }
+
+/* EXPERIENCE */
