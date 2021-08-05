@@ -41,14 +41,14 @@
     --font-semi-bold: 600;
 
     /* Space Bottom */
-    --mb-0-25: 0.25rem;
-    --mb-0-5: 0.5rem;
-    --mb-0-75: 0.75rem;
-    --mb-1: 1rem;
-    --mb-1-5: 1.5rem;
-    --mb-2: 2rem;
-    --mb-2-5: 2.5rem;
-    --mb-3: 3rem;
+    --sp-0-25: 0.25rem;
+    --sp-0-5: 0.5rem;
+    --sp-0-75: 0.75rem;
+    --sp-1: 1rem;
+    --sp-1-5: 1.5rem;
+    --sp-2: 2rem;
+    --sp-2-5: 2.5rem;
+    --sp-3: 3rem;
 
     /* z index */
     --z-tooltip: 10;
@@ -109,7 +109,7 @@ img {
 .section_subtitle {
     display: block;
     font-size: var(--small-font-size);
-    margin-bottom: var(--mb-3);
+    /* margin-bottom: var(--sp-3); */
 }
 
 .section_title,
@@ -120,7 +120,7 @@ img {
 /* LAYOUT */
 .container {
     max-width: 768px;
-    margin: 0 var(--mb-1-5);
+    margin: 0 var(--sp-1-5);
 }
 
 .grid {
@@ -164,12 +164,12 @@ header {
 .nav_icon {
     width: 20px;
     height: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .nav_list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
 }
 
 .nav_link {
@@ -198,4 +198,62 @@ header {
 /* Show Menu */
 .show_menu {
     bottom: 0;
+}
+
+/* HOME */
+.home_container {
+    gap: 1rem;
+}
+
+.home_content {
+    grid-template-columns: 0.5fr 3fr;
+    padding-top: 1.5rem;
+    align-items: center;
+}
+
+.home_social {
+    display: grid;
+    grid-template-columns: max-content;
+    row-gap: 1rem;
+}
+
+.home_social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.home_img {
+    width: 200px;
+    height: 250px;
+    border-radius: 30%;
+    overflow: hidden;
+}
+
+.profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.home_title {
+    /* font-size: var(--big-font-size); */
+    /* text-align: center; */
+    margin-bottom: 10px;
+}
+
+.home_subtitle {
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--sp-0-75);
+}
+
+.home_description {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.home_description_item {
+    font-size: 12px;
+    margin-bottom: 5px;
 }
