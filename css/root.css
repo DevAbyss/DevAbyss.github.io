@@ -1,0 +1,54 @@
+/* VARIABLES CSS */
+:root {
+    --header-height: 3rem;
+
+    /* Colors */
+    --first-color: #0099ff;
+    --first-color-second: #57e089;
+    --first-color-alt: #4392cb;
+    --first-color-lighter: ;
+    --title-color: #000;
+    --text-color: #232729;
+    --text-color-light: #6a747c;
+    --input-color: #6a747c;
+    --body-color: #fff;
+    --container-color: #fff;
+
+    /* Font and typography */
+    /* --body-font: "Nanum Myeongjo", serif; */
+
+    /* Font Size */
+    /* --big-font-size: 2rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1.15rem;
+    --normal-font-size: 0.9rem;
+    --small-font-size: 0.8rem;
+    --smaller-font-size: 0.7rem; */
+    --big-font-size: 3rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.9rem;
+    --smaller-font-size: 0.8rem;
+
+    /* Font Weight */
+    --font-medium: 500;
+    --font-semi-bold: 600;
+
+    /* Space Bottom */
+    --sp-0-25: 0.25rem;
+    --sp-0-5: 0.5rem;
+    --sp-0-75: 0.75rem;
+    --sp-1: 1rem;
+    --sp-1-5: 1.5rem;
+    --sp-2: 2rem;
+    --sp-2-5: 2.5rem;
+    --sp-3: 3rem;
+
+    /* z index */
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --z-modal: 1000;
+}

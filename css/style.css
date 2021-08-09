@@ -1,60 +1,7 @@
+@import url("./root.css");
+
 /* GOOGLE FONT */
 /* @import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap"); */
-
-/* VARIABLES CSS */
-:root {
-    --header-height: 3rem;
-
-    /* Colors */
-    --first-color: #0099ff;
-    --first-color-second: #57e089;
-    --first-color-alt: #4392cb;
-    --first-color-lighter: ;
-    --title-color: #000;
-    --text-color: #232729;
-    --text-color-light: #6a747c;
-    --input-color: #6a747c;
-    --body-color: #fff;
-    --container-color: #fff;
-
-    /* Font and typography */
-    /* --body-font: "Nanum Myeongjo", serif; */
-
-    /* Font Size */
-    /* --big-font-size: 2rem;
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1.25rem;
-    --h3-font-size: 1.15rem;
-    --normal-font-size: 0.9rem;
-    --small-font-size: 0.8rem;
-    --smaller-font-size: 0.7rem; */
-    --big-font-size: 3rem;
-    --h1-font-size: 2.25rem;
-    --h2-font-size: 1.5rem;
-    --h3-font-size: 1.25rem;
-    --normal-font-size: 1rem;
-    --small-font-size: 0.9rem;
-    --smaller-font-size: 0.8rem;
-
-    /* Font Weight */
-    --font-medium: 500;
-    --font-semi-bold: 600;
-
-    /* Space Bottom */
-    --sp-0-25: 0.25rem;
-    --sp-0-5: 0.5rem;
-    --sp-0-75: 0.75rem;
-    --sp-1: 1rem;
-    --sp-1-5: 1.5rem;
-    --sp-2: 2rem;
-    --sp-2-5: 2.5rem;
-    --sp-3: 3rem;
-
-    /* z index */
-    --z-tooltip: 10;
-    --z-fixed: 100;
-    --z-modal: 1000;
-}
 
 /* Variables Dark Theme */
 body.dark_theme {
@@ -154,7 +101,7 @@ img {
 }
 
 /* HEADER */
-header {
+.header {
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -316,4 +263,72 @@ header {
 
 ::-webkit-scrollbar-thumb {
     background-color: #a1a1a1;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        margin: 0;
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .section {
+        padding: 6rem 0 2rem;
+    }
+
+    .section_subtitle {
+        margin-bottom: 4rem;
+    }
+
+    .header {
+        top: 0;
+        bottom: initial;
+    }
+
+    .header,
+    .main {
+        padding: 0 1rem;
+    }
+
+    .nav {
+        height: calc(var(--header-height) + 1.5rem);
+        column-gap: 1rem;
+    }
+
+    .nav_icon,
+    .nav_toggle {
+        display: none;
+    }
+
+    .nav_list {
+        display: flex;
+        column-gap: 2rem;
+    }
+
+    .nav_menu {
+        margin-left: auto;
+    }
+
+    .change-theme {
+        margin: 0;
+    }
+
+    .home_container {
+        row-gap: 5rem;
+    }
+
+    .home_content {
+        padding-top: 5.5rem;
+        column-gap: 2rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header,
+    .main {
+        padding: 0;
+    }
 }

@@ -1,0 +1,19 @@
+@import url("./root.css");
+
+.container {
+    margin-left: var(--sp-1);
+    margin-right: var(--sp-1);
+}
+
+.nav_menu {
+    padding: 2rem 0.25rem;
+}
+
+.nav_list {
+    column-gap: 0;
+}
+
+/* Introduction */
+.home_content {
+    grid-template-columns: 0.25fr 3fr;
+}

@@ -1,0 +1,14 @@
+@import url("./root.css");
+
+.home_content {
+    grid-template-columns: max-content 1fr 1fr;
+}
+
+.home_data {
+    grid-column: initial;
+}
+
+.home_img {
+    order: 1;
+    justify-self: center;
+}
